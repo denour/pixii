@@ -1,116 +1,355 @@
 ---
+const slides = [
+  {
+    backgroundImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80',
+    alt: 'Equipos de logística industrial - Pixii International Power Supplies'
+  },
+  {
+    backgroundImage: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&q=80',
+    alt: 'Sistemas de energía para industria - Pixii'
+  },
+  {
+    backgroundImage: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1920&q=80',
+    alt: 'Suministro de equipos eléctricos de potencia'
+  },
+  {
+    backgroundImage: 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=1920&q=80',
+    alt: 'Tecnología industrial de vanguardia - Pixii'
+  }
+];
 ---
 
-<section class="hero" id="inicio">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">NEXO INTEGRADO DEL WORLD LOGISTICS</div>
-    <h1 class="hero-title">Smart link to<br>Global flow.</h1>
-    <div class="hero-description">
-      <p>Optimizamos tus operaciones de comercio exterior con soluciones tecnológicas avanzadas y servicios de logística integrados. Conectamos tu negocio con el mundo de manera eficiente y segura, garantizando procesos ágiles y transparentes en cada etapa de la cadena de suministro internacional.</p>
-    </div>
-    <div class="carousel-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+<section class="hero" id="inicio" aria-label="Banner principal">
+  <!-- Slides Container -->
+  <div class="hero-slider" role="region" aria-roledescription="carousel" aria-label="Presentación de servicios Pixii">
+    {slides.map((slide, index) => (
+      <div
+        class={`slide ${index === 0 ? 'active' : ''}`}
+        data-slide-index={index}
+        role="group"
+        aria-roledescription="slide"
+        aria-label={`Slide ${index + 1} de ${slides.length}`}
+      >
+        <div
+          class="slide-bg"
+          style={`background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('${slide.backgroundImage}')`}
+          role="img"
+          aria-label={slide.alt}
+        ></div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Content Box (siempre visible con el mismo texto) -->
+  <div class="hero-content-wrapper">
+    <div class="hero-content-box">
+      <div class="hero-badge" role="text">PIXII INTERNATIONAL POWER SUPPLIES</div>
+      <h1 class="hero-title">Smart link to<br>Global flow.</h1>
+      <p class="hero-description">En Pixii impulsamos la energía que mueve a la industria. Nos especializamos en el suministro y la implementación de equipos eléctricos de potencia, ofreciendo soluciones innovadoras, eficientes y adaptadas a cada necesidad. Nuestro objetivo es optimizar los proyectos de nuestros clientes con tecnología de vanguardia, costos competitivos y entregas oportunas.</p>
+
+      <!-- Button -->
+      <a href="#proyectos" class="hero-button" aria-label="Ver nuestros proyectos">
+        <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        Ver Proyectos
+      </a>
+
+      <!-- Dots inside content box -->
+      <div class="carousel-dots-inside" role="tablist" aria-label="Controles del carrusel">
+        {slides.map((_, index) => (
+          <button
+            class={`dot-inside ${index === 0 ? 'active' : ''}`}
+            data-dot-index={index}
+            role="tab"
+            aria-label={`Ir a slide ${index + 1}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            type="button"
+          ></button>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  let currentSlide = 0;
+  let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+  const slidesElements = document.querySelectorAll('.slide');
+  const dotsElements = document.querySelectorAll('.dot-inside');
+  const totalSlides = slidesElements.length;
+
+  function goToSlide(index: number) {
+    slidesElements.forEach(s => s.classList.remove('active'));
+    dotsElements.forEach(d => {
+      d.classList.remove('active');
+      d.setAttribute('aria-selected', 'false');
+    });
+    slidesElements[index]?.classList.add('active');
+    dotsElements[index]?.classList.add('active');
+    dotsElements[index]?.setAttribute('aria-selected', 'true');
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % totalSlides;
+    goToSlide(next);
+  }
+
+  function prevSlide() {
+    const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(prev);
+  }
+
+  function startAutoplay() {
+    autoplayTimer = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Dots click
+  dotsElements.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToSlide(index);
+      resetAutoplay();
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+      resetAutoplay();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+      resetAutoplay();
+    }
+  });
+
+  // Pause on hover
+  const hero = document.querySelector('.hero');
+  hero?.addEventListener('mouseenter', stopAutoplay);
+  hero?.addEventListener('mouseleave', startAutoplay);
+
+  // Start autoplay
+  startAutoplay();
+</script>
+
 <style>
   .hero {
     position: relative;
-    height: 650px;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&q=80') center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+    background: #000;
   }
 
-  .hero-overlay {
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
   }
 
-  .hero-content {
-    position: relative;
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
     z-index: 1;
+  }
+
+  .slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Content Box */
+  .hero-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .hero-content-box {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    padding: 48px 64px;
+    border-radius: 20px;
     text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     max-width: 600px;
-    padding: 120px 40px;
+    width: 90%;
   }
 
   .hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 6px 16px;
-    border-radius: 4px;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    color: var(--color-white);
-    font-weight: 600;
-    margin-bottom: 20px;
+    background: transparent;
+    border: 2px solid #000000;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 28px;
     text-transform: uppercase;
   }
 
   .hero-title {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--color-white);
-    margin-bottom: 24px;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: #000000;
+    margin: 0 0 24px 0;
   }
 
   .hero-description {
-    background: rgba(245, 242, 235, 0.95);
-    padding: 32px 36px;
-    border-radius: 4px;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1.7;
-    color: #333333;
-    margin-bottom: 32px;
-    text-align: left;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #2b2b2b;
+    text-align: center;
+    margin: 0 0 24px 0;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .carousel-dots {
+  .hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #6B7280;
+    color: #FFFFFF;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .hero-button:hover {
+    background: #4B5563;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .button-icon {
+    flex-shrink: 0;
+  }
+
+  /* Dots inside content box */
+  .carousel-dots-inside {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
+    margin-top: 28px;
+    pointer-events: all;
   }
 
-  .dot {
+  .dot-inside {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
     cursor: pointer;
-    transition: background var(--transition-base);
+    padding: 0;
+    transition: all 0.3s ease;
   }
 
-  .dot.active {
-    background: var(--color-primary);
+  .dot-inside:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.15);
+  }
+
+  .dot-inside.active {
+    background: #E63946;
+    width: 10px;
+    height: 10px;
   }
 
   @media (max-width: 768px) {
     .hero {
-      height: 500px;
+      height: 700px;
+    }
+
+    .hero-content-box {
+      padding: 36px 32px;
+      max-width: 90%;
+      margin: 0 20px;
     }
 
     .hero-title {
-      font-size: 32px;
+      font-size: 36px;
+      margin-bottom: 20px;
     }
 
     .hero-description {
       font-size: 13px;
-      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge {
+      font-size: 8px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+
+    .hero-button {
+      padding: 10px 24px;
+      font-size: 13px;
+    }
+
+    .carousel-dots-inside {
+      margin-top: 20px;
+    }
+
+    .dot-inside {
+      width: 7px;
+      height: 7px;
+    }
+
+    .dot-inside.active {
+      width: 9px;
+      height: 9px;
     }
   }
 </style>
