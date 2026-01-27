@@ -1,0 +1,60 @@
+---
+import Logo from '../atoms/Logo.astro';
+import NavMenu from '../molecules/NavMenu.astro';
+---
+
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header-content">
+      <Logo size="small" color="white" />
+      <NavMenu />
+    </div>
+  </div>
+</header>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 9999;
+    font-weight: 700;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      padding: 16px 0;
+    }
+
+    .header-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>

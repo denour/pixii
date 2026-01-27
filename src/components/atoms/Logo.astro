@@ -1,0 +1,42 @@
+---
+interface Props {
+  size?: 'small' | 'medium' | 'large';
+  color?: 'white' | 'black';
+}
+
+const { size = 'small', color = 'white' } = Astro.props;
+---
+
+<div class:list={['logo', `logo-${size}`, `logo-${color}`]}>
+  P I X I I
+</div>
+
+<style>
+  .logo {
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .logo-small {
+    font-size: var(--font-size-lg);
+    letter-spacing: 4px;
+  }
+
+  .logo-medium {
+    font-size: var(--font-size-2xl);
+    letter-spacing: 6px;
+  }
+
+  .logo-large {
+    font-size: var(--font-size-logo);
+    letter-spacing: 12px;
+  }
+
+  .logo-white {
+    color: var(--color-white);
+  }
+
+  .logo-black {
+    color: var(--color-black);
+  }
+</style>

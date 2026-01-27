@@ -1,0 +1,57 @@
+---
+interface Props {
+  variant?: 'red' | 'white' | 'black';
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const { variant = 'red', type = 'button', class: className } = Astro.props;
+---
+
+<button type={type} class:list={['btn', `btn-${variant}`, className]}>
+  <slot />
+</button>
+
+<style>
+  .btn {
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    width: fit-content;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-red {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn-red:hover {
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+  }
+
+  .btn-white {
+    background: var(--color-white);
+    color: var(--color-black);
+  }
+
+  .btn-white:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-black {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .btn-black:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+</style>

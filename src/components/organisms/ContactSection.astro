@@ -1,0 +1,124 @@
+---
+import ContactItem from '../molecules/ContactItem.astro';
+import FormField from '../molecules/FormField.astro';
+import Button from '../atoms/Button.astro';
+---
+
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Columna Izquierda - Contacto -->
+      <div class="contact-left">
+        <h2 class="contact-title">Contacto</h2>
+        <div class="contact-items">
+          <ContactItem
+            icon="mail"
+            label="EMAIL"
+            value="info@pixii.com"
+          />
+          <ContactItem
+            icon="phone"
+            label="TELÉFONO"
+            value="+52 55 1234 5678"
+          />
+          <ContactItem
+            icon="map-pin"
+            label="UBICACIÓN"
+            value="Ciudad de México, México"
+          />
+        </div>
+      </div>
+
+      <!-- Columna Derecha - Formulario -->
+      <div class="contact-right">
+        <h2 class="form-title">Queremos conocer tu proyecto</h2>
+        <form class="contact-form">
+          <FormField
+            label="Nombre"
+            name="name"
+            type="text"
+            placeholder="Tu nombre completo"
+            required
+          />
+          <FormField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="tu@email.com"
+            required
+          />
+          <FormField
+            label="Empresa"
+            name="company"
+            type="text"
+            placeholder="Nombre de tu empresa"
+          />
+          <FormField
+            label="Mensaje"
+            name="message"
+            type="textarea"
+            placeholder="Cuéntanos sobre tu proyecto..."
+            required
+          />
+          <Button type="submit" variant="black">Enviar mensaje</Button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    background: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 40px;
+  }
+
+  .contact-left {
+    background: var(--color-black);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 40px;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .contact-right {
+    padding: 20px 0;
+  }
+
+  .form-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 30px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>

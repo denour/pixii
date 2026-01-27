@@ -1,0 +1,38 @@
+---
+import Input from '../atoms/Input.astro';
+import Textarea from '../atoms/Textarea.astro';
+
+interface Props {
+  label: string;
+  name: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea';
+  placeholder?: string;
+  required?: boolean;
+}
+
+const { label, name, type = 'text', placeholder, required = false } = Astro.props;
+const id = `field-${name}`;
+---
+
+<div class="form-field">
+  <label for={id}>{label}</label>
+  {type === 'textarea' ? (
+    <Textarea name={name} id={id} placeholder={placeholder} required={required} />
+  ) : (
+    <Input type={type} name={name} id={id} placeholder={placeholder} required={required} />
+  )}
+</div>
+
+<style>
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+</style>

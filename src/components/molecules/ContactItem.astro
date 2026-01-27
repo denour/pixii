@@ -1,0 +1,46 @@
+---
+import Icon from '../atoms/Icon.astro';
+
+interface Props {
+  icon: 'mail' | 'phone' | 'map-pin';
+  label: string;
+  value: string;
+}
+
+const { icon, label, value } = Astro.props;
+---
+
+<div class="contact-item">
+  <Icon name={icon} color="#E63946" size={20} />
+  <div class="contact-info">
+    <div class="contact-label">{label}</div>
+    <div class="contact-value">{value}</div>
+  </div>
+</div>
+
+<style>
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .contact-value {
+    font-size: var(--font-size-base);
+    color: var(--color-white);
+  }
+</style>

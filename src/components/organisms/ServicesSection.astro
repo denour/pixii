@@ -1,0 +1,59 @@
+---
+import ServiceCard from '../molecules/ServiceCard.astro';
+---
+
+<section class="services" id="servicios">
+  <div class="container">
+    <h2 class="section-title">Lo que hacemos</h2>
+    <div class="services-grid">
+      <ServiceCard
+        variant="dark"
+        title="Internacionalización de negocios"
+        description="Expandimos tu alcance comercial conectándote con mercados globales mediante estrategias personalizadas de comercio exterior."
+        buttonVariant="red"
+      />
+      <ServiceCard
+        variant="image"
+        imageUrl="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80"
+        buttonVariant="white"
+      />
+      <ServiceCard
+        variant="image"
+        imageUrl="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=600&q=80"
+        buttonVariant="white"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 36px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

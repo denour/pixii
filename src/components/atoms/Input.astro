@@ -1,0 +1,43 @@
+---
+interface Props {
+  type?: 'text' | 'email' | 'tel';
+  name: string;
+  id: string;
+  placeholder?: string;
+  required?: boolean;
+}
+
+const { type = 'text', name, id, placeholder, required = false } = Astro.props;
+---
+
+<input
+  type={type}
+  name={name}
+  id={id}
+  placeholder={placeholder}
+  required={required}
+  class="input"
+/>
+
+<style>
+  .input {
+    background: #F8F8F8;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    font-family: inherit;
+    transition: border-color var(--transition-base);
+    width: 100%;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-black);
+  }
+
+  .input::placeholder {
+    color: #AAAAAA;
+  }
+</style>
