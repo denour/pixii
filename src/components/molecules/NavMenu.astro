@@ -1,25 +1,38 @@
 ---
 const navItems = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Productos y Servicios', href: '#servicios' },
-  { label: 'Contacto', href: '#contacto' }
+  { label: 'Inicio', href: '/' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Productos y Servicios', href: '/servicios' },
+  { label: 'Contacto', href: '/contacto' }
 ];
+
+// Get current path
+const currentPath = Astro.url.pathname;
 ---
 
 <!-- Desktop Navigation -->
 <nav class="nav nav-desktop" role="navigation" aria-label="Navegación principal">
-  {navItems.map((item, index) => (
-    <>
-      <a href={item.href} class="nav-link" aria-label={`Ir a ${item.label}`}>{item.label}</a>
-      {index < navItems.length - 1 && (
-        <svg class="nav-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      )}
-    </>
-  ))}
+  {navItems.map((item, index) => {
+    const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+    return (
+      <>
+        <a
+          href={item.href}
+          class={`nav-link ${isActive ? 'active' : ''}`}
+          aria-label={`Ir a ${item.label}`}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+        {index < navItems.length - 1 && (
+          <svg class="nav-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        )}
+      </>
+    );
+  })}
 </nav>
 
 <!-- Burger Menu Button -->
@@ -38,11 +51,19 @@ const navItems = [
 <!-- Mobile Navigation -->
 <nav class="nav nav-mobile" id="mobile-nav" role="navigation" aria-label="Navegación móvil">
   <div class="nav-mobile-content">
-    {navItems.map((item) => (
-      <a href={item.href} class="nav-link-mobile" aria-label={`Ir a ${item.label}`}>
-        {item.label}
-      </a>
-    ))}
+    {navItems.map((item) => {
+      const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class={`nav-link-mobile ${isActive ? 'active' : ''}`}
+          aria-label={`Ir a ${item.label}`}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      );
+    })}
   </div>
 </nav>
 
@@ -65,7 +86,6 @@ const navItems = [
       burgerBtn?.setAttribute('aria-expanded', 'false');
       mobileNav?.classList.remove('active');
       document.body.style.overflow = 'auto';
-      setTimeout(updateActiveNav, 100);
     });
   });
 
@@ -76,46 +96,6 @@ const navItems = [
       mobileNav?.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
-  });
-
-  // Detectar la sección activa basada en el scroll
-  function updateActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
-
-    let currentSection = 'inicio';
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (window.scrollY >= sectionTop - 100) {
-        currentSection = section.getAttribute('id') || 'inicio';
-      }
-    });
-
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href')?.substring(1);
-      if (href === currentSection) {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.classList.remove('active');
-        link.removeAttribute('aria-current');
-      }
-    });
-  }
-
-  // Actualizar al hacer scroll
-  window.addEventListener('scroll', updateActiveNav);
-
-  // Actualizar al cargar
-  updateActiveNav();
-
-  // Actualizar al hacer click en desktop links
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      setTimeout(updateActiveNav, 100);
-    });
   });
 </script>
 

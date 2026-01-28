@@ -2,41 +2,136 @@
 interface Props {
   size?: 'small' | 'medium' | 'large';
   color?: 'white' | 'black';
+  variant?: 'default' | 'isotype' | 'stacked';
 }
 
-const { size = 'small', color = 'white' } = Astro.props;
+const { size = 'small', color = 'white', variant = 'default' } = Astro.props;
 ---
 
-<div class:list={['logo', `logo-${size}`, `logo-${color}`]}>
-  P I X I I
-</div>
+{variant === 'isotype' ? (
+  <div class:list={['logo-isotype', `logo-${size}`]} aria-label="PIXII Isotype">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="isotype-svg">
+      <path d="M20 15L40 40L20 65" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M60 15L40 40L60 65" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+) : variant === 'stacked' ? (
+  <div class:list={['logo-stacked', `logo-${size}`]} aria-label="PIXII Logo">
+    <div class="pixii-text">P I X I I</div>
+    <div class="pixii-tagline">INTERNATIONAL POWER SUPPLIES</div>
+  </div>
+) : (
+  <a href="/" class:list={['logo', `logo-${size}`]} aria-label="PIXII - Ir al inicio">
+    <img
+      src="/images/Pixii Logo copy.png"
+      alt="PIXII Logo"
+      class="logo-image"
+      width="120"
+      height="29"
+      loading="eager"
+      decoding="async"
+    />
+  </a>
+)}
 
 <style>
   .logo {
-    font-weight: 700;
     display: inline-block;
+    line-height: 0;
+    flex-shrink: 0;
   }
 
-  .logo-small {
-    font-size: var(--font-size-lg);
-    letter-spacing: 4px;
+  .logo-image {
+    display: block;
+    height: auto;
+    object-fit: contain;
   }
 
-  .logo-medium {
-    font-size: var(--font-size-2xl);
-    letter-spacing: 6px;
+  .logo-small .logo-image {
+    width: 160px;
+    height: 39px;
   }
 
-  .logo-large {
-    font-size: var(--font-size-logo);
-    letter-spacing: 12px;
+  .logo-medium .logo-image {
+    width: 200px;
+    height: 49px;
   }
 
-  .logo-white {
-    color: var(--color-white);
+  .logo-large .logo-image {
+    width: 240px;
+    height: 58px;
   }
 
-  .logo-black {
+  /* Isotype styles */
+  .logo-isotype {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .isotype-svg {
+    display: block;
+  }
+
+  .logo-small .isotype-svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-medium .isotype-svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .logo-large .isotype-svg {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Stacked logo styles */
+  .logo-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pixii-text {
+    font-weight: 700;
     color: var(--color-black);
+    letter-spacing: 0.2em;
+  }
+
+  .pixii-tagline {
+    color: var(--color-primary);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .logo-small .pixii-text {
+    font-size: 24px;
+  }
+
+  .logo-small .pixii-tagline {
+    font-size: 8px;
+  }
+
+  .logo-medium .pixii-text {
+    font-size: 32px;
+  }
+
+  .logo-medium .pixii-tagline {
+    font-size: 9px;
+  }
+
+  .logo-large .pixii-text {
+    font-size: 48px;
+  }
+
+  .logo-large .pixii-tagline {
+    font-size: 10px;
   }
 </style>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Productos y Servicios - PIXII International Power Supplies"
+  description="Descubre nuestros productos y servicios especializados en equipos eléctricos de potencia para la industria."
+>
+  <section class="servicios-hero">
+    <div class="container">
+      <h1 class="servicios-title">Productos y Servicios</h1>
+      <p class="servicios-subtitle">Soluciones eléctricas innovadoras para la industria</p>
+    </div>
+  </section>
+
+  <section class="servicios-content">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3 class="service-title">Suministro de Equipos</h3>
+          <p class="service-description">
+            Proveemos equipos eléctricos de potencia de las mejores marcas internacionales, garantizando calidad y eficiencia en cada proyecto.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3 class="service-title">Implementación</h3>
+          <p class="service-description">
+            Instalación y puesta en marcha de sistemas eléctricos completos, asegurando el correcto funcionamiento y cumplimiento de normativas.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3 class="service-title">Consultoría Técnica</h3>
+          <p class="service-description">
+            Asesoría especializada para optimizar tus sistemas eléctricos, mejorar eficiencia energética y reducir costos operativos.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🛠️</div>
+          <h3 class="service-title">Mantenimiento</h3>
+          <p class="service-description">
+            Programas de mantenimiento preventivo y correctivo para garantizar la continuidad operativa de tus equipos eléctricos.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">Internacionalización</h3>
+          <p class="service-description">
+            Expandimos tu alcance comercial conectándote con mercados globales mediante estrategias personalizadas de comercio exterior.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚚</div>
+          <h3 class="service-title">Logística Integrada</h3>
+          <p class="service-description">
+            Gestión completa de la cadena de suministro, desde el origen hasta la entrega final, con seguimiento en tiempo real.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .servicios-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 140px 0 80px;
+    text-align: center;
+  }
+
+  .servicios-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .servicios-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+  }
+
+  .servicios-content {
+    padding: 80px 0;
+    background: var(--color-white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: #F8F8F8;
+    padding: 40px 30px;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .service-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 16px;
+  }
+
+  .service-description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666666;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .servicios-hero {
+      padding: 120px 0 60px;
+    }
+
+    .servicios-title {
+      font-size: 32px;
+    }
+
+    .servicios-subtitle {
+      font-size: 16px;
+    }
+
+    .servicios-content {
+      padding: 60px 0;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .service-card {
+      padding: 30px 24px;
+    }
+
+    .service-icon {
+      font-size: 40px;
+    }
+
+    .service-title {
+      font-size: 20px;
+    }
+
+    .service-description {
+      font-size: 14px;
+    }
+  }
+</style>

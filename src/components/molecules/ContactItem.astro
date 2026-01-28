@@ -2,27 +2,65 @@
 import Icon from '../atoms/Icon.astro';
 
 interface Props {
-  icon: 'mail' | 'phone' | 'map-pin';
+  icon: 'mail' | 'phone' | 'map-pin' | 'whatsapp' | 'instagram';
   label: string;
   value: string;
+  href?: string;
+  html?: boolean;
 }
 
-const { icon, label, value } = Astro.props;
+const { icon, label, value, href, html = false } = Astro.props;
+const Component = href ? 'a' : 'div';
 ---
 
-<div class="contact-item">
-  <Icon name={icon} color="#E63946" size={20} />
+<Component class:list={['contact-item', { 'contact-link': href }]} href={href} target={href?.startsWith('http') ? '_blank' : undefined} rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}>
+  <Icon name={icon} />
   <div class="contact-info">
     <div class="contact-label">{label}</div>
-    <div class="contact-value">{value}</div>
+    {html ? (
+      <div class="contact-value" set:html={value} />
+    ) : (
+      <div class="contact-value">{value}</div>
+    )}
   </div>
-</div>
+</Component>
 
 <style>
   .contact-item {
     display: flex;
     gap: 16px;
     align-items: flex-start;
+  }
+
+  .contact-item :global(.icon-wrapper) {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .contact-item :global(.with-background) {
+    background-color: #E63946 !important;
+    border-radius: 50% !important;
+  }
+
+  .contact-item :global(.icon) {
+    flex-shrink: 0;
+  }
+
+  .contact-link {
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .contact-link:hover {
+    transform: translateX(4px);
+    opacity: 0.9;
   }
 
   .contact-info {

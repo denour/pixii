@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Proyectos - PIXII International Power Supplies"
+  description="Descubre nuestros proyectos de implementación de equipos eléctricos de potencia para la industria. Soluciones innovadoras y eficientes."
+>
+  <section class="proyectos-hero" id="proyectos">
+    <div class="container">
+      <h1 class="proyectos-title">Nuestros Proyectos</h1>
+      <p class="proyectos-subtitle">Soluciones implementadas que impulsan la industria</p>
+    </div>
+  </section>
+
+  <!-- Contenido de proyectos aquí -->
+  <section class="proyectos-content">
+    <div class="container">
+      <p class="empty-state">Contenido de proyectos próximamente...</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .proyectos-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 140px 0 80px;
+    text-align: center;
+  }
+
+  .proyectos-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .proyectos-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+  }
+
+  .proyectos-content {
+    padding: 80px 0;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-state {
+    font-size: 18px;
+    color: var(--color-gray-dark);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .proyectos-hero {
+      padding: 120px 0 60px;
+    }
+
+    .proyectos-title {
+      font-size: 32px;
+    }
+
+    .proyectos-subtitle {
+      font-size: 16px;
+    }
+
+    .proyectos-content {
+      padding: 60px 0;
+    }
+  }
+</style>

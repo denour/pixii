@@ -48,7 +48,7 @@ const slides = [
       <p class="hero-description">En Pixii impulsamos la energía que mueve a la industria. Nos especializamos en el suministro y la implementación de equipos eléctricos de potencia, ofreciendo soluciones innovadoras, eficientes y adaptadas a cada necesidad. Nuestro objetivo es optimizar los proyectos de nuestros clientes con tecnología de vanguardia, costos competitivos y entregas oportunas.</p>
 
       <!-- Button -->
-      <a href="#proyectos" class="hero-button" aria-label="Ver nuestros proyectos">
+      <a href="/proyectos" class="hero-button" aria-label="Ver nuestros proyectos">
         <svg class="button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
@@ -204,13 +204,13 @@ const slides = [
   }
 
   .hero-content-box {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(20px);
     padding: 48px 64px;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
+    max-width: 800px;
     width: 90%;
   }
 
@@ -218,21 +218,20 @@ const slides = [
     display: inline-block;
     background: transparent;
     border: 2px solid #000000;
-    padding: 8px 20px;
+    padding: 10px 40px;
     border-radius: 100px;
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-size: 13px;
+    letter-spacing: 8px;
     color: #000000;
     font-weight: 700;
     margin-bottom: 28px;
     text-transform: uppercase;
+    width: fit-content;
+    max-width: 90%;
+    white-space: nowrap;
   }
 
   .hero-title {
-    font-size: 56px;
-    font-weight: 400;
-    line-height: 1.15;
-    color: #000000;
     margin: 0 0 24px 0;
   }
 
@@ -317,7 +316,6 @@ const slides = [
     }
 
     .hero-title {
-      font-size: 36px;
       margin-bottom: 20px;
     }
 
@@ -328,9 +326,13 @@ const slides = [
     }
 
     .hero-badge {
-      font-size: 8px;
-      padding: 6px 16px;
+      font-size: 10px;
+      padding: 8px 20px;
       margin-bottom: 20px;
+      letter-spacing: 2px;
+      white-space: normal;
+      word-wrap: break-word;
+      max-width: 100%;
     }
 
     .hero-button {

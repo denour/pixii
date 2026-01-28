@@ -2,26 +2,49 @@
 import ServiceCard from '../molecules/ServiceCard.astro';
 ---
 
-<section class="services" id="servicios">
+<section
+  class="services"
+  id="servicios"
+  aria-labelledby="services-heading"
+  itemscope
+  itemtype="https://schema.org/Service"
+>
   <div class="container">
-    <h2 class="section-title">Lo que hacemos</h2>
-    <div class="services-grid">
-      <ServiceCard
-        variant="dark"
-        title="Internacionalización de negocios"
-        description="Expandimos tu alcance comercial conectándote con mercados globales mediante estrategias personalizadas de comercio exterior."
-        buttonVariant="red"
-      />
-      <ServiceCard
-        variant="image"
-        imageUrl="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80"
-        buttonVariant="white"
-      />
-      <ServiceCard
-        variant="image"
-        imageUrl="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=600&q=80"
-        buttonVariant="white"
-      />
+    <h2 id="services-heading" class="section-title" itemprop="serviceType">Lo que hacemos</h2>
+    <div class="services-grid" role="list">
+      <div role="listitem" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <meta itemprop="name" content="Subestaciones eléctricas" />
+        <meta itemprop="description" content="Subestaciones eléctricas para Carga, Distribución y Transmisión" />
+        <meta itemprop="category" content="Ingeniería Eléctrica" />
+        <ServiceCard
+          variant="image"
+          imageUrl="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80"
+          buttonVariant="white"
+          bottomText="Subestaciones eléctricas para Carga, Distribución y Transmisión."
+        />
+      </div>
+      <div role="listitem" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <meta itemprop="name" content="Centrales Eléctricas de Generación" />
+        <meta itemprop="description" content="Centrales Eléctricas de Generación de energía" />
+        <meta itemprop="category" content="Generación Eléctrica" />
+        <ServiceCard
+          variant="image"
+          imageUrl="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80"
+          buttonVariant="white"
+          bottomText="Centrales Eléctricas de Generación."
+        />
+      </div>
+      <div role="listitem" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <meta itemprop="name" content="Redes eléctricas y líneas de transmisión" />
+        <meta itemprop="description" content="Redes eléctricas y líneas de transmisión y Distribución" />
+        <meta itemprop="category" content="Transmisión y Distribución" />
+        <ServiceCard
+          variant="image"
+          imageUrl="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=600&q=80"
+          buttonVariant="white"
+          bottomText="Redes eléctricas y líneas de transmisión y Distribución."
+        />
+      </div>
     </div>
   </div>
 </section>
@@ -33,9 +56,6 @@ import ServiceCard from '../molecules/ServiceCard.astro';
   }
 
   .section-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--color-black);
     margin-bottom: 36px;
   }
 
@@ -52,8 +72,5 @@ import ServiceCard from '../molecules/ServiceCard.astro';
   }
 
   @media (max-width: 768px) {
-    .section-title {
-      font-size: var(--font-size-3xl);
-    }
   }
 </style>

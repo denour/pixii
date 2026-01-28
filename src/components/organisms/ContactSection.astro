@@ -1,6 +1,5 @@
 ---
-import ContactItem from '../molecules/ContactItem.astro';
-import FormField from '../molecules/FormField.astro';
+import ContactInfo from '../molecules/ContactInfo.astro';
 import Button from '../atoms/Button.astro';
 ---
 
@@ -8,59 +7,121 @@ import Button from '../atoms/Button.astro';
   <div class="container">
     <div class="contact-grid">
       <!-- Columna Izquierda - Contacto -->
-      <div class="contact-left">
-        <h2 class="contact-title">Contacto</h2>
-        <div class="contact-items">
-          <ContactItem
-            icon="mail"
-            label="EMAIL"
-            value="info@pixii.com"
-          />
-          <ContactItem
-            icon="phone"
-            label="TELÉFONO"
-            value="+52 55 1234 5678"
-          />
-          <ContactItem
-            icon="map-pin"
-            label="UBICACIÓN"
-            value="Ciudad de México, México"
-          />
-        </div>
-      </div>
+      <ContactInfo />
 
       <!-- Columna Derecha - Formulario -->
-      <div class="contact-right">
+      <div class="contact-right" itemscope itemtype="https://schema.org/ContactPage">
         <h2 class="form-title">Queremos conocer tu proyecto</h2>
-        <form class="contact-form">
-          <FormField
-            label="Nombre"
-            name="name"
-            type="text"
-            placeholder="Tu nombre completo"
-            required
-          />
-          <FormField
-            label="Email"
-            name="email"
-            type="email"
-            placeholder="tu@email.com"
-            required
-          />
-          <FormField
-            label="Empresa"
-            name="company"
-            type="text"
-            placeholder="Nombre de tu empresa"
-          />
-          <FormField
-            label="Mensaje"
-            name="message"
-            type="textarea"
-            placeholder="Cuéntanos sobre tu proyecto..."
-            required
-          />
-          <Button type="submit" variant="black">Enviar mensaje</Button>
+        <form
+          class="contact-form"
+          action="/contacto"
+          method="POST"
+          name="contact"
+          aria-label="Formulario de contacto"
+          itemscope
+          itemtype="https://schema.org/ContactForm"
+        >
+          <div class="form-row">
+            <div class="form-field material">
+              <input
+                type="text"
+                name="nombre"
+                id="nombre"
+                required
+                autocomplete="given-name"
+                itemprop="givenName"
+                aria-label="Nombre"
+              />
+              <label for="nombre">Nombre</label>
+              <span class="focus-border"></span>
+            </div>
+            <div class="form-field material">
+              <input
+                type="text"
+                name="apellido"
+                id="apellido"
+                required
+                autocomplete="family-name"
+                itemprop="familyName"
+                aria-label="Apellido"
+              />
+              <label for="apellido">Apellido</label>
+              <span class="focus-border"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field material">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                autocomplete="email"
+                itemprop="email"
+                aria-label="Correo electrónico"
+              />
+              <label for="email">Email</label>
+              <span class="focus-border"></span>
+            </div>
+            <div class="form-field material">
+              <input
+                type="tel"
+                name="telefono"
+                id="telefono"
+                required
+                autocomplete="tel"
+                itemprop="telephone"
+                aria-label="Número telefónico"
+              />
+              <label for="telefono">Número Telefónico</label>
+              <span class="focus-border"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field material">
+              <input
+                type="text"
+                name="proyecto"
+                id="proyecto"
+                required
+                aria-label="Tipo de proyecto"
+              />
+              <label for="proyecto">Tipo de Proyecto</label>
+              <span class="focus-border"></span>
+            </div>
+            <div class="form-field material">
+              <input
+                type="text"
+                name="ciudad"
+                id="ciudad"
+                required
+                autocomplete="address-level2"
+                itemprop="addressLocality"
+                aria-label="Ciudad"
+              />
+              <label for="ciudad">Ciudad</label>
+              <span class="focus-border"></span>
+            </div>
+          </div>
+
+          <div class="form-field material full-width">
+            <textarea
+              name="mensaje"
+              id="mensaje"
+              rows="4"
+              required
+              itemprop="text"
+              aria-label="Mensaje"
+            ></textarea>
+            <label for="mensaje">¿Cómo te podemos ayudar?</label>
+            <span class="focus-border"></span>
+          </div>
+
+          <div class="form-actions">
+            <Button type="submit" variant="black">Enviar</Button>
+          </div>
         </form>
       </div>
     </div>
@@ -77,25 +138,7 @@ import Button from '../atoms/Button.astro';
     display: grid;
     grid-template-columns: 45% 55%;
     gap: 40px;
-  }
-
-  .contact-left {
-    background: var(--color-black);
-    padding: var(--spacing-2xl) var(--spacing-xl);
-    border-radius: var(--radius-lg);
-  }
-
-  .contact-title {
-    font-size: var(--font-size-4xl);
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: 40px;
-  }
-
-  .contact-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
+    width: 100%;
   }
 
   .contact-right {
@@ -103,22 +146,178 @@ import Button from '../atoms/Button.astro';
   }
 
   .form-title {
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
-    color: var(--color-black);
     margin-bottom: 30px;
   }
 
   .contact-form {
     display: flex;
     flex-direction: column;
+    gap: 30px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
+  }
+
+  /* Material Design Input Styles */
+  .form-field.material {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .form-field.material.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .form-field.material input,
+  .form-field.material textarea {
+    width: 100%;
+    padding: 12px 8px;
+    font-size: 14px;
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #CCCCCC;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+  }
+
+  .form-field.material textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-field.material label {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    font-size: 14px;
+    color: #999999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    font-weight: 400;
+  }
+
+  .form-field.material input:focus,
+  .form-field.material textarea:focus {
+    border-bottom-color: #E63946;
+  }
+
+  .form-field.material input:focus ~ label,
+  .form-field.material input:valid ~ label,
+  .form-field.material textarea:focus ~ label,
+  .form-field.material textarea:valid ~ label {
+    top: -18px;
+    font-size: 12px;
+    color: #E63946;
+  }
+
+  .form-field.material .focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #E63946;
+    transition: width 0.3s ease;
+  }
+
+  .form-field.material input:focus ~ .focus-border,
+  .form-field.material textarea:focus ~ .focus-border {
+    width: 100%;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .form-actions :global(.btn) {
+    margin: 0 !important;
+    display: inline-block !important;
   }
 
   @media (max-width: 1024px) {
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 40px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: var(--spacing-2xl) 0;
+    }
+
+    .contact-grid {
+      gap: 30px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .contact-right {
+      padding: 0 var(--spacing-md);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-title {
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .contact-form {
+      gap: 20px;
+    }
+
+    .form-row {
+      gap: 16px;
+    }
+
+    .form-field.material {
+      margin-bottom: 16px;
+    }
+
+    .form-field.material input,
+    .form-field.material textarea {
+      font-size: 16px;
+      padding: 14px 12px;
+    }
+
+    .form-field.material label {
+      font-size: 16px;
+      top: 14px;
+      left: 12px;
+    }
+
+    .form-field.material input:focus ~ label,
+    .form-field.material input:valid ~ label,
+    .form-field.material textarea:focus ~ label,
+    .form-field.material textarea:valid ~ label {
+      top: -16px;
+      font-size: 13px;
+    }
+
+    .form-field.material textarea {
+      min-height: 120px;
+    }
+
+    .form-actions {
+      justify-content: stretch;
+    }
+
+    .form-actions :global(.btn) {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

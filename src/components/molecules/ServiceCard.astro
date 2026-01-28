@@ -7,38 +7,66 @@ interface Props {
   variant: 'dark' | 'image';
   imageUrl?: string;
   buttonVariant?: 'red' | 'white';
+  bottomText?: string;
 }
 
-const { title, description, variant, imageUrl, buttonVariant = 'red' } = Astro.props;
+const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText } = Astro.props;
 ---
 
-<div class:list={['service-card', `service-card-${variant}`]} style={imageUrl ? `background-image: url(${imageUrl})` : ''}>
-  {variant === 'image' && <div class="card-overlay"></div>}
+<div class:list={['service-card', `service-card-${variant}`]}>
+  {variant === 'image' && imageUrl && (
+    <div class="card-image-wrapper">
+      <img
+        src={imageUrl}
+        alt=""
+        class="card-image"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="card-overlay"></div>
+    </div>
+  )}
   <div class="card-content">
     {title && <h3 class="card-title">{title}</h3>}
     {description && <p class="card-description">{description}</p>}
-    <Button variant={buttonVariant}>Ver más</Button>
   </div>
+  {bottomText && (
+    <div class="card-bottom">
+      <p class="card-bottom-text">{bottomText}</p>
+      <Button variant={buttonVariant}>Conoce más</Button>
+    </div>
+  )}
 </div>
 
 <style>
   .service-card {
     position: relative;
     height: 400px;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: var(--color-black);
   }
 
   .service-card-dark {
-    background: var(--color-black);
     padding: 36px;
   }
 
-  .service-card-image {
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  .card-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 180px);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
   }
 
   .card-overlay {
@@ -55,6 +83,7 @@ const { title, description, variant, imageUrl, buttonVariant = 'red' } = Astro.p
     height: 100%;
     display: flex;
     flex-direction: column;
+    z-index: 2;
   }
 
   .service-card-image .card-content {
@@ -76,5 +105,35 @@ const { title, description, variant, imageUrl, buttonVariant = 'red' } = Astro.p
     color: #CCCCCC;
     flex: 1;
     margin-bottom: 20px;
+  }
+
+  .card-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000000;
+    padding: 24px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 3;
+  }
+
+  .card-bottom-text {
+    color: #FFFFFF;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .card-bottom-text {
+      margin-bottom: 20px;
+    }
   }
 </style>

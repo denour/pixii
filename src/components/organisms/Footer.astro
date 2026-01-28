@@ -6,12 +6,7 @@ import Logo from '../atoms/Logo.astro';
   <div class="container">
     <div class="footer-content">
       <Logo size="medium" color="white" />
-      <nav class="footer-nav">
-        <a href="#privacidad">Privacidad</a>
-        <a href="#terminos">Términos</a>
-        <a href="#cookies">Cookies</a>
-      </nav>
-      <p class="footer-copyright">© 2026 Pixii. Todos los derechos reservados.</p>
+      <p class="footer-copyright">© 2026 Pixii, International Power Supplies. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
@@ -24,24 +19,10 @@ import Logo from '../atoms/Logo.astro';
 
   .footer-content {
     text-align: center;
-  }
-
-  .footer-nav {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
-    margin: 40px 0 30px;
-  }
-
-  .footer-nav a {
-    font-size: 13px;
-    color: var(--color-gray-medium);
-    text-decoration: none;
-    transition: color var(--transition-base);
-  }
-
-  .footer-nav a:hover {
-    color: var(--color-white);
   }
 
   .footer-copyright {

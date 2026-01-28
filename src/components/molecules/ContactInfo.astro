@@ -1,0 +1,77 @@
+---
+import ContactItem from './ContactItem.astro';
+---
+
+<div class="contact-info-wrapper">
+  <h2 class="contact-title">Contacto</h2>
+  <div class="contact-items">
+    <div class="contact-row">
+      <ContactItem
+        icon="phone"
+        label="TELÉFONO"
+        value="+526861191352"
+        href="tel:+526861191352"
+      />
+      <ContactItem
+        icon="whatsapp"
+        label="WHATSAPP"
+        value="686 1191352"
+        href="https://wa.me/526861191352"
+      />
+    </div>
+    <ContactItem
+      icon="mail"
+      label="EMAIL"
+      value="ventas@pbdint.com"
+      href="mailto:ventas@pbdint.com"
+    />
+    <ContactItem
+      icon="map-pin"
+      label="UBICACIÓN"
+      value="<strong>Oficinas en</strong><br/>Mexicali, Querétaro, Monterrey,<br/>San Luis Potosí, Tijuana"
+      html
+    />
+    <ContactItem
+      icon="instagram"
+      label="SÍGUENOS"
+      value="Pixii"
+      href="https://instagram.com/pixii"
+    />
+  </div>
+</div>
+
+<style>
+  .contact-info-wrapper {
+    background: var(--color-black);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-title {
+    color: var(--color-white);
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 768px) {
+    .contact-info-wrapper {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+  }
+</style>

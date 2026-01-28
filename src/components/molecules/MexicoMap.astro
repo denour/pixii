@@ -1,0 +1,214 @@
+---
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+interface Props {
+  highlightedStates?: string[];
+  highlightColor?: string;
+  defaultColor?: string;
+  interactive?: boolean;
+  class?: string;
+}
+
+const {
+  highlightedStates = [],
+  highlightColor = '#E63946',
+  defaultColor = '#b9b9b9',
+  interactive = true,
+  class: className = ''
+} = Astro.props;
+
+// Mapeo de nombres de estados a IDs de paths en el SVG
+// Los IDs ahora coinciden directamente con los nombres de los estados
+const statePathIds: Record<string, string> = {
+  'aguascalientes': 'aguascalientes',
+  'baja_california': 'baja_california',
+  'baja_california_sur': 'baja_california_sur',
+  'campeche': 'campeche',
+  'chiapas': 'chiapas',
+  'chihuahua': 'chihuahua',
+  'coahuila': 'coahuila',
+  'colima': 'colima',
+  'durango': 'durango',
+  'guanajuato': 'guanajuato',
+  'guerrero': 'guerrero',
+  'hidalgo': 'hidalgo',
+  'jalisco': 'jalisco',
+  'ciudad_de_mexico': 'ciudad_de_mexico',
+  'estado_de_mexico': 'estado_de_mexico',
+  'michoacan': 'michoacan',
+  'morelos': 'morelos',
+  'nayarit': 'nayarit',
+  'nuevo_leon': 'nuevo_leon',
+  'oaxaca': 'oaxaca',
+  'puebla': 'puebla',
+  'queretaro': 'queretaro',
+  'quintana_roo': 'quintana_roo',
+  'san_luis_potosi': 'san_luis_potosi',
+  'sinaloa': 'sinaloa',
+  'sonora': 'sonora',
+  'tabasco': 'tabasco',
+  'tamaulipas': 'tamaulipas',
+  'tlaxcala': 'tlaxcala',
+  'veracruz': 'veracruz',
+  'yucatan': 'yucatan',
+  'zacatecas': 'zacatecas'
+};
+
+// Leer el SVG
+const svgPath = join(process.cwd(), 'public/images/mexico.svg');
+let svgContent = readFileSync(svgPath, 'utf-8');
+
+// Aplicar los colores a los estados destacados
+highlightedStates.forEach(stateName => {
+  const pathId = statePathIds[stateName];
+  if (pathId) {
+    // Buscar y reemplazar el color del estado
+    const regex = new RegExp(`(id="${pathId}"[^>]*style="[^"]*fill:)#[A-Fa-f0-9]{6}(;[^"]*")`, 'g');
+    svgContent = svgContent.replace(regex, `$1${highlightColor}$2`);
+  }
+});
+
+// Generar ID único para este componente
+const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`mexico-map-container ${className}`} data-interactive={interactive}>
+  <div id={uniqueId} class="mexico-map-svg" set:html={svgContent} />
+</div>
+
+{interactive && (
+  <script define:vars={{ uniqueId, highlightedStatesJson: JSON.stringify(highlightedStates) }}>
+    const container = document.getElementById(uniqueId);
+    if (container) {
+      const svg = container.querySelector('svg');
+      const states = JSON.parse(highlightedStatesJson);
+
+      states.forEach(stateName => {
+        const path = svg?.querySelector(`[id="${stateName}"]`);
+        if (path) {
+          path.classList.add('interactive-state');
+          path.classList.add('highlighted');
+          path.setAttribute('data-state-name', stateName);
+
+          // Crear pin con tooltip
+          const pin = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+          // Mapeo de nombres de estados a ciudades
+          const stateCities = {
+            'baja_california': 'Mexicali, Tijuana',
+            'nuevo_leon': 'Monterrey',
+            'san_luis_potosi': 'San Luis Potosí',
+            'queretaro': 'Querétaro'
+          };
+
+          const stateLabel = stateCities[stateName] || stateName.replace(/_/g, ' ').toUpperCase();
+          const textWidth = stateLabel.length * 8; // Aproximado
+          const boxWidth = textWidth + 32; // Padding de 16px a cada lado
+          const boxX = 40; // Translapado con el pin
+
+          pin.innerHTML = `
+            <rect x="${boxX}" y="15" width="${boxWidth}" height="30" rx="4" fill="#000000" fill-opacity="0.5"/>
+            <text x="${boxX + boxWidth / 2}" y="33" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="500">${stateLabel}</text>
+            <path d="M35 0C23.4 0 14 9.4 14 21c0 15.75 21 35 21 35s21-19.25 21-35c0-11.6-9.4-21-21-21z" fill="#FFFFFF" stroke="#000000" stroke-width="2" style="fill: #FFFFFF !important;"/>
+          `;
+          pin.style.opacity = '0';
+          pin.style.transition = 'opacity 0.2s ease';
+          pin.style.pointerEvents = 'none';
+          pin.classList.add('map-pin');
+          svg.appendChild(pin);
+
+          // Eventos de hover con glow, scale y pin
+          path.addEventListener('mouseenter', (e) => {
+            path.style.opacity = '0.8';
+            path.style.cursor = 'pointer';
+            path.style.transform = 'scale(1.01)';
+            path.style.transformOrigin = 'center';
+            path.style.filter = 'drop-shadow(0 0 8px rgba(230, 57, 70, 0.6))';
+
+            // Posicionar y mostrar pin en el centro del estado
+            const bbox = path.getBBox();
+            const centerX = bbox.x + bbox.width / 2 - 35;
+            const centerY = bbox.y + bbox.height / 2 - 49;
+            pin.setAttribute('transform', `translate(${centerX}, ${centerY})`);
+            pin.style.opacity = '1';
+          });
+
+          path.addEventListener('mouseleave', (e) => {
+            path.style.opacity = '1';
+            path.style.transform = '';
+            path.style.filter = '';
+            pin.style.opacity = '0';
+          });
+
+          // Evento de click (opcional)
+          path.addEventListener('click', (e) => {
+            console.log(`Clicked on: ${stateName}`);
+          });
+        }
+      });
+    }
+  </script>
+)}
+
+<style>
+  .mexico-map-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .mexico-map-svg {
+    max-width: 500px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mexico-map-svg :global(svg) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mexico-map-svg :global(svg path) {
+    fill: #b9b9b9;
+    stroke: #999999;
+    stroke-width: 0.5;
+  }
+
+  .mexico-map-svg :global(svg path.highlighted) {
+    fill: #E63946;
+    stroke: #c4303b;
+  }
+
+  .mexico-map-svg :global(svg path.interactive-state) {
+    transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .mexico-map-svg :global(svg path.interactive-state:hover) {
+    transform: scale(1.01);
+    transform-origin: center;
+    filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.6));
+  }
+
+  /* Animación de entrada */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .mexico-map-svg :global(svg) {
+    animation: fadeIn 0.6s ease-out;
+  }
+</style>
