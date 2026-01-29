@@ -1,20 +1,64 @@
 ---
+import { getImage } from 'astro:assets';
+import banner1 from '../../assets/images/banner_1.png';
+import banner2 from '../../assets/images/banner_2.png';
+import banner3 from '../../assets/images/banner_3.png';
+import banner4 from '../../assets/images/banner_4.png';
+
+// Optimization settings
+const desktopSettings = { width: 1920, height: 750, format: 'webp' as const, quality: 80 };
+const tabletSettings = { width: 1024, height: 700, format: 'webp' as const, quality: 75 };
+const mobileSettings = { width: 768, height: 700, format: 'webp' as const, quality: 70 };
+
+// Generate optimized images for all banners
+const [
+  banner1Desktop, banner1Tablet, banner1Mobile,
+  banner2Desktop, banner2Tablet, banner2Mobile,
+  banner3Desktop, banner3Tablet, banner3Mobile,
+  banner4Desktop, banner4Tablet, banner4Mobile
+] = await Promise.all([
+  // Banner 1
+  getImage({ src: banner1, ...desktopSettings }),
+  getImage({ src: banner1, ...tabletSettings }),
+  getImage({ src: banner1, ...mobileSettings }),
+  // Banner 2
+  getImage({ src: banner2, ...desktopSettings }),
+  getImage({ src: banner2, ...tabletSettings }),
+  getImage({ src: banner2, ...mobileSettings }),
+  // Banner 3
+  getImage({ src: banner3, ...desktopSettings }),
+  getImage({ src: banner3, ...tabletSettings }),
+  getImage({ src: banner3, ...mobileSettings }),
+  // Banner 4
+  getImage({ src: banner4, ...desktopSettings }),
+  getImage({ src: banner4, ...tabletSettings }),
+  getImage({ src: banner4, ...mobileSettings }),
+]);
+
 const slides = [
   {
-    backgroundImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80',
-    alt: 'Equipos de logística industrial - Pixii International Power Supplies'
+    desktop: banner1Desktop.src,
+    tablet: banner1Tablet.src,
+    mobile: banner1Mobile.src,
+    alt: 'Equipos eléctricos de potencia - Pixii International Power Supplies'
   },
   {
-    backgroundImage: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&q=80',
-    alt: 'Sistemas de energía para industria - Pixii'
+    desktop: banner2Desktop.src,
+    tablet: banner2Tablet.src,
+    mobile: banner2Mobile.src,
+    alt: 'Soluciones industriales de energía - Pixii International Power Supplies'
   },
   {
-    backgroundImage: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1920&q=80',
-    alt: 'Suministro de equipos eléctricos de potencia'
+    desktop: banner3Desktop.src,
+    tablet: banner3Tablet.src,
+    mobile: banner3Mobile.src,
+    alt: 'Sistemas de distribución eléctrica - Pixii'
   },
   {
-    backgroundImage: 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=1920&q=80',
-    alt: 'Tecnología industrial de vanguardia - Pixii'
+    desktop: banner4Desktop.src,
+    tablet: banner4Tablet.src,
+    mobile: banner4Mobile.src,
+    alt: 'Suministro de equipos eléctricos de potencia - Pixii'
   }
 ];
 ---
@@ -30,12 +74,29 @@ const slides = [
         aria-roledescription="slide"
         aria-label={`Slide ${index + 1} de ${slides.length}`}
       >
-        <div
-          class="slide-bg"
-          style={`background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('${slide.backgroundImage}')`}
-          role="img"
-          aria-label={slide.alt}
-        ></div>
+        <picture class="slide-picture">
+          <source
+            media="(max-width: 767px)"
+            srcset={slide.mobile}
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 1024px)"
+            srcset={slide.tablet}
+            type="image/webp"
+          />
+          <img
+            src={slide.desktop}
+            alt={slide.alt}
+            class="slide-img"
+            width="1920"
+            height="750"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding={index === 0 ? 'sync' : 'async'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+          />
+        </picture>
+        <div class="slide-overlay"></div>
       </div>
     ))}
   </div>
@@ -178,15 +239,29 @@ const slides = [
     z-index: 1;
   }
 
-  .slide-bg {
+  .slide-picture {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55));
+    z-index: 1;
   }
 
   /* Content Box */
