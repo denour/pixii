@@ -1,0 +1,1346 @@
+---
+// Schema.org structured data for SEO
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Proyectos PIXII",
+  "description": "Proyectos de subestaciones eléctricas, centrales de generación y redes de transmisión",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Subestaciones Eléctricas",
+        "description": "Proyectos de subestaciones para carga, distribución y transmisión"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Centrales Eléctricas",
+        "description": "Proyectos de centrales de generación eléctrica"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Redes Eléctricas y Líneas de Transmisión",
+        "description": "Proyectos de redes eléctricas y líneas de transmisión"
+      }
+    ]
+  }
+};
+
+const projects = [
+  {
+    id: 'subestaciones',
+    title: 'Subestaciones Eléctricas',
+    subtitle: 'para Carga, Distribución, Transmisión.',
+    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&h=600&fit=crop',
+    items: [
+      { image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop', label: 'Subestación de Carga Industrial' },
+      { image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop', label: 'Subestación de Distribución' },
+      { image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop', label: 'Subestación de Transmisión' },
+      { image: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?w=600&h=400&fit=crop', label: 'Subestación Compacta' }
+    ]
+  },
+  {
+    id: 'centrales',
+    title: 'Centrales Eléctricas',
+    subtitle: 'de Generación',
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&h=600&fit=crop',
+    items: [
+      { image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop', label: 'Central Solar Fotovoltaica' },
+      { image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop', label: 'Central Eólica' },
+      { image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop', label: 'Central Hidroeléctrica' },
+      { image: 'https://images.unsplash.com/photo-1570449722773-2e9be8c56a10?w=600&h=400&fit=crop', label: 'Central Térmica' }
+    ]
+  },
+  {
+    id: 'redes',
+    title: 'Redes Eléctricas y Líneas de Transmisión',
+    subtitle: '',
+    image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1920&h=600&fit=crop',
+    items: [
+      { image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop', label: 'Línea de Alta Tensión' },
+      { image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop', label: 'Línea de Media Tensión' },
+      { image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop', label: 'Red de Distribución' },
+      { image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop', label: 'Interconexión Regional' }
+    ]
+  }
+];
+---
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+<div class="projects-page">
+  <!-- Header Section with Title -->
+  <section class="projects-header">
+    <div class="container">
+      <h1 class="projects-title">Proyectos</h1>
+    </div>
+  </section>
+
+  <!-- Horizontal Project Cards -->
+  <section class="projects-cards" aria-label="Categorías de proyectos">
+    {projects.map((project, index) => (
+      <a
+        href={`#${project.id}`}
+        class="project-card"
+        data-target={project.id}
+        aria-label={`Ver proyectos de ${project.title}`}
+      >
+        <div class="card-background">
+          <img
+            src={project.image}
+            alt={`Imagen de ${project.title}`}
+            class="card-image"
+            width="640"
+            height="500"
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchpriority={index === 0 ? "high" : "auto"}
+          />
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">{project.title}</h2>
+          {project.subtitle && <p class="card-subtitle">{project.subtitle}</p>}
+          <span class="card-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Conocer más
+          </span>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <!-- Detail Sections (hidden by default) -->
+  {projects.map((project) => (
+    <section
+      id={project.id}
+      class="project-detail"
+      data-section={project.id}
+      aria-labelledby={`title-${project.id}`}
+    >
+      <div class="container">
+        <h2 id={`title-${project.id}`} class="detail-title">{project.title}</h2>
+
+        <div class="detail-grid" role="list" data-gallery={project.id}>
+          {project.items.map((item, itemIndex) => (
+            <article
+              class="detail-card"
+              role="listitem"
+              data-gallery-item
+              data-index={itemIndex}
+              data-image={item.image.replace('w=600&h=400', 'w=1200&h=800')}
+              data-label={item.label}
+              tabindex="0"
+            >
+              <div class="detail-card-image">
+                <img
+                  src={item.image}
+                  alt={item.label}
+                  width="300"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="detail-card-label">
+                <span>{item.label}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+</div>
+
+<!-- Gallery Lightbox -->
+<div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="lightbox-overlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" aria-label="Cerrar galería">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <button class="lightbox-nav lightbox-prev" aria-label="Imagen anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-image-container">
+      <img class="lightbox-image" src="" alt="" />
+      <div class="lightbox-caption"></div>
+    </div>
+
+    <button class="lightbox-nav lightbox-next" aria-label="Imagen siguiente">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-counter"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    const allSections = document.querySelectorAll('.project-detail');
+
+    // Hide all sections initially
+    allSections.forEach(section => {
+      section.style.display = 'none';
+    });
+
+    function showSection(targetId: string) {
+      // Hide all sections first
+      allSections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Show the target section
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.style.display = 'block';
+
+        // Update URL hash
+        history.pushState(null, '', `#${targetId}`);
+
+        // Smooth scroll to section
+        setTimeout(() => {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      }
+    }
+
+    projectCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = card.getAttribute('data-target');
+        if (targetId) {
+          showSection(targetId);
+        }
+      });
+    });
+
+    // Handle direct URL access with hash
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      showSection(targetId);
+    }
+
+    // ============================================
+    // Gallery Lightbox Functionality
+    // ============================================
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImage = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
+    const lightboxCaption = lightbox?.querySelector('.lightbox-caption');
+    const lightboxCounter = lightbox?.querySelector('.lightbox-counter');
+    const lightboxClose = lightbox?.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox?.querySelector('.lightbox-next');
+    const lightboxOverlay = lightbox?.querySelector('.lightbox-overlay');
+
+    let currentGalleryItems: HTMLElement[] = [];
+    let currentIndex = 0;
+
+    function openLightbox(galleryItems: HTMLElement[], index: number) {
+      currentGalleryItems = galleryItems;
+      currentIndex = index;
+      updateLightboxContent();
+
+      if (lightbox) {
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function updateLightboxContent() {
+      const item = currentGalleryItems[currentIndex];
+      if (!item || !lightboxImage || !lightboxCaption || !lightboxCounter) return;
+
+      const imageSrc = item.getAttribute('data-image') || '';
+      const label = item.getAttribute('data-label') || '';
+
+      lightboxImage.src = imageSrc;
+      lightboxImage.alt = label;
+      lightboxCaption.textContent = label;
+      lightboxCounter.textContent = `${currentIndex + 1} / ${currentGalleryItems.length}`;
+    }
+
+    function showPrevImage() {
+      currentIndex = (currentIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+      updateLightboxContent();
+    }
+
+    function showNextImage() {
+      currentIndex = (currentIndex + 1) % currentGalleryItems.length;
+      updateLightboxContent();
+    }
+
+    // Event listeners for gallery items
+    document.querySelectorAll('.detail-card[data-gallery-item]').forEach(card => {
+      const openGallery = () => {
+        const grid = card.closest('.detail-grid');
+        if (!grid) return;
+
+        const galleryItems = Array.from(grid.querySelectorAll('[data-gallery-item]')) as HTMLElement[];
+        const index = parseInt(card.getAttribute('data-index') || '0', 10);
+
+        openLightbox(galleryItems, index);
+      };
+
+      card.addEventListener('click', openGallery);
+      card.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+          e.preventDefault();
+          openGallery();
+        }
+      });
+    });
+
+    // Lightbox controls
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxOverlay?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', showPrevImage);
+    lightboxNext?.addEventListener('click', showNextImage);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox?.classList.contains('active')) return;
+
+      switch (e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          showPrevImage();
+          break;
+        case 'ArrowRight':
+          showNextImage();
+          break;
+      }
+    });
+  });
+</script>
+
+<style>
+  .projects-page {
+    min-height: 100vh;
+    background: var(--color-white);
+  }
+
+  .projects-header {
+    padding: 140px 0 60px;
+    background: var(--color-white);
+  }
+
+  .projects-title {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--color-black);
+    line-height: 1.2;
+  }
+
+  /* Horizontal Project Cards */
+  .projects-cards {
+    display: flex;
+    flex-direction: row;
+    height: 70vh;
+    min-height: 500px;
+  }
+
+  .project-card {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    overflow: hidden;
+    transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* When hovering on the container, shrink non-hovered cards */
+  .projects-cards:hover .project-card {
+    flex: 0.7;
+  }
+
+  .projects-cards:hover .project-card:hover {
+    flex: 1.6;
+  }
+
+  .card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    background-color: #1a1a1a;
+  }
+
+  /* Prevent layout shift */
+  .card-background img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .project-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: background 0.4s ease;
+  }
+
+  /* Different opacity levels for each card */
+  .project-card:nth-child(1) .card-overlay {
+    background: rgba(0, 0, 0, 0.65);
+  }
+
+  .project-card:nth-child(2) .card-overlay {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .project-card:nth-child(3) .card-overlay {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .project-card:nth-child(1):hover .card-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .project-card:nth-child(2):hover .card-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .project-card:nth-child(3):hover .card-overlay {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-white);
+    opacity: 0.9;
+    margin-bottom: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: rgba(128, 128, 128, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .card-btn {
+    background: rgba(128, 128, 128, 0.5);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .card-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Detail Sections */
+  .project-detail {
+    padding: 80px 0;
+    background-image: url('/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .detail-title {
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--color-black);
+    margin-bottom: 48px;
+    line-height: 1.3;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  .detail-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .detail-card-image {
+    flex: 4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    background-color: #e5e5e5;
+  }
+
+  /* Lazy load fade-in effect */
+  .detail-card-image img[loading="lazy"] {
+    opacity: 1;
+  }
+
+  .detail-card:hover .detail-card-image img {
+    transform: scale(1.05);
+  }
+
+  .detail-card-label {
+    flex: 1;
+    background: var(--color-black);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .detail-card-label span {
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ============================================
+     Responsive Breakpoints
+     ============================================ */
+
+  /* Large Desktop (1440px+) */
+  @media (min-width: 1441px) {
+    .detail-grid {
+      gap: 32px;
+    }
+
+    .detail-card-label {
+      padding: 20px;
+    }
+
+    .detail-card-label span {
+      font-size: 16px;
+    }
+  }
+
+  /* Desktop (1200px - 1440px) */
+  @media (max-width: 1440px) {
+    .projects-title {
+      font-size: 44px;
+    }
+
+    .card-title {
+      font-size: 26px;
+    }
+
+    .detail-title {
+      font-size: 32px;
+    }
+  }
+
+  /* Small Desktop / Large Tablet (1024px - 1199px) */
+  @media (max-width: 1199px) {
+    .projects-title {
+      font-size: 40px;
+    }
+
+    .projects-cards {
+      height: 60vh;
+      min-height: 450px;
+    }
+
+    .card-content {
+      padding: 32px 24px;
+    }
+
+    .card-title {
+      font-size: 22px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .detail-title {
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    .detail-card-label {
+      padding: 14px;
+    }
+
+    .detail-card-label span {
+      font-size: 13px;
+    }
+  }
+
+  /* Tablet Landscape (900px - 1023px) */
+  @media (max-width: 1023px) {
+    .projects-header {
+      padding: 130px 0 50px;
+    }
+
+    .projects-title {
+      font-size: 36px;
+    }
+
+    .projects-cards {
+      height: 55vh;
+      min-height: 400px;
+    }
+
+    .card-content {
+      padding: 28px 20px;
+    }
+
+    .card-title {
+      font-size: 20px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+    }
+
+    .card-btn {
+      padding: 10px 18px;
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .detail-title {
+      font-size: 26px;
+    }
+
+    .detail-card-image img {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  /* Tablet Portrait (768px - 899px) */
+  @media (max-width: 899px) {
+    .projects-header {
+      padding: 120px 0 40px;
+    }
+
+    .projects-title {
+      font-size: 32px;
+    }
+
+    .projects-cards {
+      height: 50vh;
+      min-height: 380px;
+    }
+
+    .card-content {
+      padding: 24px 18px;
+    }
+
+    .card-title {
+      font-size: 18px;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+    }
+
+    .card-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    .card-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .project-detail {
+      padding: 60px 0;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .detail-card-label {
+      padding: 12px;
+    }
+
+    .detail-card-label span {
+      font-size: 12px;
+    }
+  }
+
+  /* Large Mobile / Small Tablet (600px - 767px) */
+  @media (max-width: 767px) {
+    .projects-header {
+      padding: 110px 0 32px;
+    }
+
+    .projects-title {
+      font-size: 28px;
+    }
+
+    .projects-cards {
+      flex-direction: column;
+      height: auto;
+      min-height: auto;
+    }
+
+    .project-card {
+      height: 220px;
+      flex: none !important;
+    }
+
+    .projects-cards:hover .project-card,
+    .projects-cards:hover .project-card:hover {
+      flex: none !important;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 20px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+    }
+
+    .card-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    .card-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .project-detail {
+      padding: 48px 0;
+    }
+
+    .detail-title {
+      font-size: 22px;
+      margin-bottom: 28px;
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .detail-card-image img {
+      aspect-ratio: 1 / 1;
+    }
+
+    .detail-card-label {
+      padding: 14px;
+    }
+
+    .detail-card-label span {
+      font-size: 13px;
+    }
+  }
+
+  /* Mobile (480px - 599px) */
+  @media (max-width: 599px) {
+    .projects-header {
+      padding: 100px 0 28px;
+    }
+
+    .projects-title {
+      font-size: 26px;
+    }
+
+    .project-card {
+      height: 200px;
+    }
+
+    .card-content {
+      padding: 18px 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+    }
+
+    .card-btn {
+      margin-top: 14px;
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    .project-detail {
+      padding: 40px 0;
+    }
+
+    .detail-title {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+
+    .detail-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .detail-card {
+      border-radius: 6px;
+    }
+
+    .detail-card-image img {
+      aspect-ratio: 3 / 4;
+    }
+
+    .detail-card-label {
+      padding: 12px;
+    }
+
+    .detail-card-label span {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+  }
+
+  /* Small Mobile (< 480px) */
+  @media (max-width: 479px) {
+    .projects-header {
+      padding: 90px 0 24px;
+    }
+
+    .projects-title {
+      font-size: 24px;
+    }
+
+    .project-card {
+      height: 180px;
+    }
+
+    .card-content {
+      padding: 16px 14px;
+    }
+
+    .card-title {
+      font-size: 16px;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+    }
+
+    .card-btn {
+      margin-top: 12px;
+      padding: 8px 14px;
+      font-size: 11px;
+      gap: 6px;
+    }
+
+    .card-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .project-detail {
+      padding: 32px 0;
+    }
+
+    .detail-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .detail-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .detail-card-image img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .detail-card-label {
+      padding: 14px 16px;
+    }
+
+    .detail-card-label span {
+      font-size: 13px;
+    }
+  }
+
+  /* Extra Small Mobile (< 360px) */
+  @media (max-width: 359px) {
+    .projects-title {
+      font-size: 22px;
+    }
+
+    .project-card {
+      height: 160px;
+    }
+
+    .card-title {
+      font-size: 15px;
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+    }
+
+    .card-btn {
+      padding: 7px 12px;
+      font-size: 10px;
+    }
+
+    .detail-title {
+      font-size: 16px;
+    }
+  }
+
+  /* ============================================
+     Gallery Lightbox Styles
+     ============================================ */
+  .gallery-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .gallery-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+  }
+
+  .lightbox-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-prev {
+    left: 20px;
+  }
+
+  .lightbox-next {
+    right: 20px;
+  }
+
+  .lightbox-image-container {
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: calc(80vh - 60px);
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-caption {
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Make detail cards clickable */
+  .detail-card[data-gallery-item] {
+    cursor: pointer;
+  }
+
+  .detail-card[data-gallery-item]:focus {
+    outline: 2px solid var(--color-primary, #007bff);
+    outline-offset: 4px;
+  }
+
+  /* Lightbox Responsive */
+  @media (max-width: 1023px) {
+    .lightbox-content {
+      padding: 60px 60px;
+    }
+
+    .lightbox-nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .lightbox-content {
+      padding: 70px 16px 80px;
+      flex-direction: column;
+    }
+
+    .lightbox-close {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .lightbox-close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .lightbox-nav {
+      position: fixed;
+      top: auto;
+      bottom: 24px;
+      transform: none;
+      width: 48px;
+      height: 48px;
+    }
+
+    .lightbox-prev {
+      left: calc(50% - 60px);
+    }
+
+    .lightbox-next {
+      right: calc(50% - 60px);
+    }
+
+    .lightbox-image-container {
+      max-width: 100%;
+      max-height: calc(100vh - 180px);
+    }
+
+    .lightbox-image {
+      max-height: calc(70vh - 60px);
+      border-radius: 6px;
+    }
+
+    .lightbox-caption {
+      font-size: 14px;
+      padding: 0 16px;
+      margin-top: 16px;
+    }
+
+    .lightbox-counter {
+      bottom: auto;
+      top: 24px;
+      left: 16px;
+      transform: none;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .lightbox-content {
+      padding: 60px 12px 90px;
+    }
+
+    .lightbox-close {
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .lightbox-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      bottom: 20px;
+    }
+
+    .lightbox-nav svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .lightbox-prev {
+      left: calc(50% - 54px);
+    }
+
+    .lightbox-next {
+      right: calc(50% - 54px);
+    }
+
+    .lightbox-image {
+      max-height: calc(65vh - 40px);
+      border-radius: 4px;
+    }
+
+    .lightbox-caption {
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .lightbox-counter {
+      top: 18px;
+      font-size: 12px;
+    }
+  }
+
+  /* Touch device improvements */
+  @media (hover: none) and (pointer: coarse) {
+    .detail-card:hover {
+      transform: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .detail-card:hover .detail-card-image img {
+      transform: none;
+    }
+
+    .detail-card:active {
+      transform: scale(0.98);
+    }
+
+    .project-card:hover .card-image {
+      transform: none;
+    }
+
+    .lightbox-nav:hover,
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: none;
+    }
+
+    .lightbox-nav:active,
+    .lightbox-close:active {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  /* Landscape orientation on mobile */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .projects-cards {
+      height: 80vh;
+      min-height: 300px;
+    }
+
+    .project-card {
+      height: 100%;
+    }
+
+    .lightbox-content {
+      padding: 50px 80px;
+    }
+
+    .lightbox-image {
+      max-height: calc(100vh - 120px);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-top: 0;
+    }
+
+    .lightbox-counter {
+      bottom: 16px;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev {
+      left: 16px;
+    }
+
+    .lightbox-next {
+      right: 16px;
+    }
+  }
+</style>
