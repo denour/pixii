@@ -48,6 +48,9 @@ const currentPath = Astro.url.pathname;
   <span class="burger-line"></span>
 </button>
 
+<!-- Mobile Navigation Overlay -->
+<div class="nav-overlay" id="nav-overlay"></div>
+
 <!-- Mobile Navigation -->
 <nav class="nav nav-mobile" id="mobile-nav" role="navigation" aria-label="Navegación móvil">
   <div class="nav-mobile-content">
@@ -71,30 +74,44 @@ const currentPath = Astro.url.pathname;
   // Toggle mobile menu
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
+  const navOverlay = document.getElementById('nav-overlay');
   const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
+  function closeMenu() {
+    burgerBtn?.setAttribute('aria-expanded', 'false');
+    mobileNav?.classList.remove('active');
+    navOverlay?.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  function openMenu() {
+    burgerBtn?.setAttribute('aria-expanded', 'true');
+    mobileNav?.classList.add('active');
+    navOverlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
   burgerBtn?.addEventListener('click', () => {
     const isOpen = burgerBtn.getAttribute('aria-expanded') === 'true';
-    burgerBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-    mobileNav?.classList.toggle('active');
-    document.body.style.overflow = isOpen ? 'auto' : 'hidden';
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
+
+  // Close mobile menu when clicking overlay
+  navOverlay?.addEventListener('click', closeMenu);
 
   // Close mobile menu when clicking a link
   mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      burgerBtn?.setAttribute('aria-expanded', 'false');
-      mobileNav?.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
+    link.addEventListener('click', closeMenu);
   });
 
   // Close mobile menu on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav?.classList.contains('active')) {
-      burgerBtn?.setAttribute('aria-expanded', 'false');
-      mobileNav?.classList.remove('active');
-      document.body.style.overflow = 'auto';
+      closeMenu();
     }
   });
 </script>
@@ -165,6 +182,26 @@ const currentPath = Astro.url.pathname;
     transform: translateY(-10.5px) rotate(-45deg);
   }
 
+  /* Mobile Navigation Overlay */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
   /* Mobile Navigation */
   .nav-mobile {
     position: fixed;
@@ -224,6 +261,10 @@ const currentPath = Astro.url.pathname;
     }
 
     .nav-mobile {
+      display: block;
+    }
+
+    .nav-overlay {
       display: block;
     }
   }

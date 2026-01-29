@@ -430,6 +430,8 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   }
 
   .form-title {
+    font-size: 48px;
+    font-weight: 400;
     margin-bottom: 30px;
   }
 
@@ -658,6 +660,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   @media (max-width: 768px) {
     .contact-section {
       padding: var(--spacing-2xl) 0;
+      padding-top: 120px;
     }
 
     .contact-grid {
@@ -667,14 +670,16 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     }
 
     .contact-right {
-      padding: 0 var(--spacing-md);
+      padding: 30px var(--spacing-md);
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
+      border-radius: var(--radius-lg);
     }
 
     .form-title {
-      font-size: 24px;
+      font-size: 28px;
+      font-weight: 400;
       margin-bottom: 24px;
       text-align: center;
     }
