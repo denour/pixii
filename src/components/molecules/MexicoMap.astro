@@ -110,7 +110,7 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
           pin.innerHTML = `
             <rect x="${boxX}" y="15" width="${boxWidth}" height="30" rx="4" fill="#000000" fill-opacity="0.5"/>
             <text x="${boxX + boxWidth / 2}" y="33" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="500">${stateLabel}</text>
-            <path d="M35 0C23.4 0 14 9.4 14 21c0 15.75 21 35 21 35s21-19.25 21-35c0-11.6-9.4-21-21-21z" fill="#FFFFFF" stroke="#000000" stroke-width="2" style="fill: #FFFFFF !important;"/>
+            <image x="0" y="-10" width="70" height="80" href="/images/pin.svg"/>
           `;
           pin.style.opacity = '0';
           pin.style.transition = 'opacity 0.2s ease';

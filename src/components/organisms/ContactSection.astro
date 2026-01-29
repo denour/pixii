@@ -28,12 +28,17 @@ import Button from '../atoms/Button.astro';
                 name="nombre"
                 id="nombre"
                 required
+                minlength="2"
+                maxlength="50"
+                pattern="[A-Za-zÀ-ÿ\s]+"
                 autocomplete="given-name"
                 itemprop="givenName"
                 aria-label="Nombre"
+                aria-describedby="nombre-error"
               />
               <label for="nombre">Nombre</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="nombre-error" role="alert"></span>
             </div>
             <div class="form-field material">
               <input
@@ -41,12 +46,17 @@ import Button from '../atoms/Button.astro';
                 name="apellido"
                 id="apellido"
                 required
+                minlength="2"
+                maxlength="50"
+                pattern="[A-Za-zÀ-ÿ\s]+"
                 autocomplete="family-name"
                 itemprop="familyName"
                 aria-label="Apellido"
+                aria-describedby="apellido-error"
               />
               <label for="apellido">Apellido</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="apellido-error" role="alert"></span>
             </div>
           </div>
 
@@ -60,9 +70,11 @@ import Button from '../atoms/Button.astro';
                 autocomplete="email"
                 itemprop="email"
                 aria-label="Correo electrónico"
+                aria-describedby="email-error"
               />
               <label for="email">Email</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="email-error" role="alert"></span>
             </div>
             <div class="form-field material">
               <input
@@ -70,12 +82,16 @@ import Button from '../atoms/Button.astro';
                 name="telefono"
                 id="telefono"
                 required
+                minlength="10"
+                maxlength="15"
                 autocomplete="tel"
                 itemprop="telephone"
                 aria-label="Número telefónico"
+                aria-describedby="telefono-error"
               />
               <label for="telefono">Número Telefónico</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="telefono-error" role="alert"></span>
             </div>
           </div>
 
@@ -86,10 +102,14 @@ import Button from '../atoms/Button.astro';
                 name="proyecto"
                 id="proyecto"
                 required
+                minlength="3"
+                maxlength="100"
                 aria-label="Tipo de proyecto"
+                aria-describedby="proyecto-error"
               />
               <label for="proyecto">Tipo de Proyecto</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="proyecto-error" role="alert"></span>
             </div>
             <div class="form-field material">
               <input
@@ -97,12 +117,16 @@ import Button from '../atoms/Button.astro';
                 name="ciudad"
                 id="ciudad"
                 required
+                minlength="2"
+                maxlength="50"
                 autocomplete="address-level2"
                 itemprop="addressLocality"
                 aria-label="Ciudad"
+                aria-describedby="ciudad-error"
               />
               <label for="ciudad">Ciudad</label>
               <span class="focus-border"></span>
+              <span class="error-message" id="ciudad-error" role="alert"></span>
             </div>
           </div>
 
@@ -112,11 +136,15 @@ import Button from '../atoms/Button.astro';
               id="mensaje"
               rows="4"
               required
+              minlength="10"
+              maxlength="1000"
               itemprop="text"
               aria-label="Mensaje"
+              aria-describedby="mensaje-error"
             ></textarea>
             <label for="mensaje">¿Cómo te podemos ayudar?</label>
             <span class="focus-border"></span>
+            <span class="error-message" id="mensaje-error" role="alert"></span>
           </div>
 
           <div class="form-actions">
@@ -127,6 +155,157 @@ import Button from '../atoms/Button.astro';
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact-form') as HTMLFormElement;
+    if (!form) return;
+
+    // Validation rules
+    const validations: Record<string, {
+      validate: (value: string) => boolean;
+      message: string;
+    }> = {
+      nombre: {
+        validate: (value) => /^[A-Za-zÀ-ÿ\s]{2,50}$/.test(value.trim()),
+        message: 'Ingresa un nombre válido (solo letras, mínimo 2 caracteres)'
+      },
+      apellido: {
+        validate: (value) => /^[A-Za-zÀ-ÿ\s]{2,50}$/.test(value.trim()),
+        message: 'Ingresa un apellido válido (solo letras, mínimo 2 caracteres)'
+      },
+      email: {
+        validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
+        message: 'Ingresa un correo electrónico válido'
+      },
+      telefono: {
+        validate: (value) => /^[\d\s\-\+\(\)]{10,15}$/.test(value.trim()),
+        message: 'Ingresa un número telefónico válido (10-15 dígitos)'
+      },
+      proyecto: {
+        validate: (value) => value.trim().length >= 3,
+        message: 'Describe el tipo de proyecto (mínimo 3 caracteres)'
+      },
+      ciudad: {
+        validate: (value) => value.trim().length >= 2,
+        message: 'Ingresa una ciudad válida'
+      },
+      mensaje: {
+        validate: (value) => value.trim().length >= 10,
+        message: 'El mensaje debe tener al menos 10 caracteres'
+      }
+    };
+
+    // Show error message
+    function showError(field: HTMLInputElement | HTMLTextAreaElement, message: string) {
+      const formField = field.closest('.form-field');
+      const errorElement = formField?.querySelector('.error-message');
+
+      formField?.classList.add('error');
+      formField?.classList.remove('valid');
+
+      if (errorElement) {
+        errorElement.textContent = message;
+      }
+
+      field.setAttribute('aria-invalid', 'true');
+    }
+
+    // Clear error message
+    function clearError(field: HTMLInputElement | HTMLTextAreaElement) {
+      const formField = field.closest('.form-field');
+      const errorElement = formField?.querySelector('.error-message');
+
+      formField?.classList.remove('error');
+
+      if (errorElement) {
+        errorElement.textContent = '';
+      }
+
+      field.setAttribute('aria-invalid', 'false');
+    }
+
+    // Show valid state
+    function showValid(field: HTMLInputElement | HTMLTextAreaElement) {
+      const formField = field.closest('.form-field');
+      formField?.classList.add('valid');
+      formField?.classList.remove('error');
+      field.setAttribute('aria-invalid', 'false');
+    }
+
+    // Validate single field
+    function validateField(field: HTMLInputElement | HTMLTextAreaElement): boolean {
+      const fieldName = field.name;
+      const value = field.value;
+      const validation = validations[fieldName];
+
+      if (!validation) return true;
+
+      // Check if empty (required)
+      if (field.required && !value.trim()) {
+        showError(field, 'Este campo es requerido');
+        return false;
+      }
+
+      // Check custom validation
+      if (value.trim() && !validation.validate(value)) {
+        showError(field, validation.message);
+        return false;
+      }
+
+      // Field is valid
+      if (value.trim()) {
+        showValid(field);
+      } else {
+        clearError(field);
+      }
+
+      return true;
+    }
+
+    // Add real-time validation on blur
+    const fields = form.querySelectorAll('input, textarea');
+    fields.forEach(field => {
+      const inputField = field as HTMLInputElement | HTMLTextAreaElement;
+
+      // Validate on blur
+      inputField.addEventListener('blur', () => {
+        validateField(inputField);
+      });
+
+      // Clear error on input (while typing)
+      inputField.addEventListener('input', () => {
+        const formField = inputField.closest('.form-field');
+        if (formField?.classList.contains('error')) {
+          clearError(inputField);
+        }
+      });
+    });
+
+    // Form submit validation
+    form.addEventListener('submit', (e) => {
+      let isValid = true;
+
+      fields.forEach(field => {
+        const inputField = field as HTMLInputElement | HTMLTextAreaElement;
+        if (!validateField(inputField)) {
+          isValid = false;
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+
+        // Focus on first error field
+        const firstError = form.querySelector('.form-field.error input, .form-field.error textarea') as HTMLElement;
+        firstError?.focus();
+
+        // Scroll to form if needed
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+</script>
 
 <style>
   .contact-section {
@@ -230,6 +409,63 @@ import Button from '../atoms/Button.astro';
     width: 100%;
   }
 
+  /* Error state */
+  .form-field.material.error input,
+  .form-field.material.error textarea {
+    border-bottom-color: #E63946;
+  }
+
+  .form-field.material.error label {
+    color: #E63946;
+  }
+
+  .form-field.material.error .focus-border {
+    background-color: #E63946;
+  }
+
+  .form-field.material.error input:focus ~ label,
+  .form-field.material.error input:valid ~ label,
+  .form-field.material.error textarea:focus ~ label,
+  .form-field.material.error textarea:valid ~ label {
+    color: #E63946;
+  }
+
+  .error-message {
+    display: block;
+    font-size: 12px;
+    color: #E63946;
+    margin-top: 6px;
+    min-height: 18px;
+    line-height: 1.4;
+  }
+
+  /* Valid state */
+  .form-field.material.valid input,
+  .form-field.material.valid textarea {
+    border-bottom-color: #16a34a;
+  }
+
+  .form-field.material.valid .focus-border {
+    background-color: #16a34a;
+    width: 100%;
+  }
+
+  .form-field.material.valid input ~ label,
+  .form-field.material.valid textarea ~ label {
+    color: #16a34a;
+  }
+
+  /* Shake animation for errors */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+
+  .form-field.material.error {
+    animation: shake 0.4s ease-in-out;
+  }
+
   .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -318,6 +554,11 @@ import Button from '../atoms/Button.astro';
     .form-actions :global(.btn) {
       width: 100%;
       justify-content: center;
+    }
+
+    .error-message {
+      font-size: 11px;
+      margin-top: 4px;
     }
   }
 </style>

@@ -8,9 +8,10 @@ interface Props {
   imageUrl?: string;
   buttonVariant?: 'red' | 'white';
   bottomText?: string;
+  href?: string;
 }
 
-const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText } = Astro.props;
+const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText, href } = Astro.props;
 ---
 
 <div class:list={['service-card', `service-card-${variant}`]}>
@@ -33,7 +34,11 @@ const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText
   {bottomText && (
     <div class="card-bottom">
       <p class="card-bottom-text">{bottomText}</p>
-      <Button variant={buttonVariant}>Conoce más</Button>
+      {href ? (
+        <a href={href} class:list={['service-button', `service-button-${buttonVariant}`]}>Conoce más</a>
+      ) : (
+        <Button variant={buttonVariant}>Conoce más</Button>
+      )}
     </div>
   )}
 </div>
@@ -46,6 +51,12 @@ const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     background: var(--color-black);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
 
   .service-card-dark {
@@ -127,13 +138,63 @@ const { title, description, variant, imageUrl, buttonVariant = 'red', bottomText
     color: #FFFFFF;
     font-size: 18px;
     line-height: 1.6;
-    text-align: justify;
+    text-align: left;
     margin: 0;
+    text-transform: capitalize;
   }
 
   @media (max-width: 768px) {
     .card-bottom-text {
       margin-bottom: 20px;
     }
+  }
+
+  /* Service button link styles */
+  .service-button {
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .service-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .service-button-red {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .service-button-red:hover {
+    background: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+  }
+
+  .service-button-white {
+    background: var(--color-white);
+    color: var(--color-black);
+  }
+
+  .service-button-white:hover {
+    background: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+  }
+
+  /* Card hover effect on button */
+  .service-card:hover .service-button-white {
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
   }
 </style>
