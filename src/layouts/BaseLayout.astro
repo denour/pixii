@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 
 const siteName = 'PIXII International Power Supplies';
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 
 <!DOCTYPE html>
@@ -71,10 +72,23 @@ const siteName = 'PIXII International Power Supplies';
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#000000">
+
+  <!-- Google Analytics -->
+  {gaId && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+      <script define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    </>
+  )}
 </head>
 <body>
   <Header />
-  <main>
+  <main id="main-content" role="main">
     <slot />
   </main>
   <Footer />

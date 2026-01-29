@@ -85,7 +85,7 @@ const organizationSchema = {
     <div class="container">
       <div class="featured-image-wrapper">
         <img
-          src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1200&q=80"
+          src="/images/nosotros.png"
           alt="Instalaciones industriales de equipos eléctricos de potencia con transformadores y grúa en planta de Pixii International Power Supplies"
           class="featured-image"
           loading="lazy"
@@ -99,8 +99,8 @@ const organizationSchema = {
 
   <!-- Mission, Vision & Values Section -->
   <section class="mission-vision-section" aria-labelledby="mv-heading">
-    <h2 id="mv-heading" class="visually-hidden">Misión y Visión de PIXII International Power Supplies</h2>
     <div class="container">
+      <h2 id="mv-heading" class="section-heading">Misión y Visión</h2>
       <div class="mv-content">
         <article class="mv-block" itemscope itemtype="https://schema.org/Mission">
           <h3 class="mv-title">Nuestra Misión</h3>
@@ -215,7 +215,8 @@ const organizationSchema = {
 
 <style>
   /* Visually hidden utility for accessibility */
-  .visually-hidden {
+  .visually-hidden,
+  .sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -225,6 +226,15 @@ const organizationSchema = {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  /* Section heading for Mission/Vision */
+  .section-heading {
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 48px;
   }
 
   /* Hero Section */
