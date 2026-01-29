@@ -1,32 +1,42 @@
 ---
-// Schema.org structured data for SEO
+// Schema.org structured data for SEO - Enhanced
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Proyectos PIXII",
-  "description": "Proyectos de subestaciones eléctricas, centrales de generación y redes de transmisión",
+  "name": "Proyectos - PIXII International Power Supplies",
+  "description": "Portafolio de proyectos de infraestructura eléctrica: subestaciones eléctricas, centrales de generación, redes eléctricas y líneas de transmisión en México.",
+  "url": "https://pixii.com.mx/proyectos",
   "mainEntity": {
     "@type": "ItemList",
+    "numberOfItems": 3,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
         "name": "Subestaciones Eléctricas",
-        "description": "Proyectos de subestaciones para carga, distribución y transmisión"
+        "description": "Proyectos de subestaciones para carga, distribución y transmisión de energía eléctrica",
+        "url": "https://pixii.com.mx/proyectos#subestaciones"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Centrales Eléctricas de Generación",
-        "description": "Proyectos de centrales de generación eléctrica"
+        "description": "Proyectos de centrales de generación eléctrica y plantas solares",
+        "url": "https://pixii.com.mx/proyectos#centrales"
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Redes Eléctricas",
-        "description": "Proyectos de redes eléctricas y líneas de transmisión"
+        "name": "Redes Eléctricas y Líneas de Transmisión",
+        "description": "Proyectos de redes eléctricas y líneas de transmisión de alta tensión",
+        "url": "https://pixii.com.mx/proyectos#redes"
       }
     ]
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "PIXII International Power Supplies",
+    "url": "https://pixii.com.mx"
   }
 };
 
@@ -145,16 +155,16 @@ const projects = [
       },
       {
         label: 'Planta de Generación Thompson',
-        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
         gallery: [
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON02.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON03.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON04.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON05.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON06.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON07.jpeg`,
-          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON08.jpeg`
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON05.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON06.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON07.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON08.jpeg`
         ]
       },
       {
@@ -337,15 +347,15 @@ const projects = [
         href={`#${project.id}`}
         class="project-card"
         data-target={project.id}
-        aria-label={`Ver proyectos de ${project.title}`}
+        aria-label={`Ver proyectos de ${project.title}: ${project.subtitle}`}
       >
         <div class="card-background">
           <img
             src={project.image}
-            alt={`Imagen de ${project.title}`}
+            alt={`${project.title} - ${project.subtitle} | PIXII Proyectos`}
             class="card-image"
-            width="640"
-            height="500"
+            width="800"
+            height="600"
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
             fetchpriority={index === 0 ? "high" : "auto"}
@@ -387,19 +397,22 @@ const projects = [
               data-gallery-images={JSON.stringify(item.gallery)}
               data-label={item.label}
               tabindex="0"
+              itemscope
+              itemtype="https://schema.org/Project"
             >
               <div class="detail-card-image">
                 <img
                   src={item.thumbnail}
-                  alt={item.label}
-                  width="300"
-                  height="400"
+                  alt={`${item.label} - PIXII ${project.title}`}
+                  width="400"
+                  height="533"
                   loading="lazy"
                   decoding="async"
+                  itemprop="image"
                 />
               </div>
               <div class="detail-card-label">
-                <span>{item.label}</span>
+                <span itemprop="name">{item.label}</span>
               </div>
             </article>
           ))}
@@ -446,6 +459,32 @@ const projects = [
   document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card');
     const allSections = document.querySelectorAll('.project-detail');
+
+    // ============================================
+    // Lazy Load Image Fade-in Effect
+    // ============================================
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    lazyImages.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+
+    // Also handle eager loaded images
+    const eagerImages = document.querySelectorAll('img:not([loading="lazy"])');
+    eagerImages.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      }
+    });
 
     // Hide all sections initially
     allSections.forEach(section => {
@@ -704,6 +743,7 @@ const projects = [
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: #1a1a1a;
   }
 
   .card-image {
@@ -712,6 +752,13 @@ const projects = [
     object-fit: cover;
     transition: transform 0.5s ease, opacity 0.3s ease;
     background-color: #1a1a1a;
+    /* Smooth fade-in for lazy loaded images */
+    opacity: 0;
+  }
+
+  .card-image.loaded,
+  .card-image:not([loading="lazy"]) {
+    opacity: 1;
   }
 
   /* Prevent layout shift */
@@ -854,19 +901,26 @@ const projects = [
     flex: 4;
     position: relative;
     overflow: hidden;
+    /* Prevent layout shift with aspect-ratio container */
+    aspect-ratio: 3 / 4;
+    background-color: #f0f0f0;
   }
 
   .detail-card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 3 / 4;
     transition: transform 0.4s ease, opacity 0.3s ease;
     background-color: #e5e5e5;
+    /* Smooth fade-in for lazy loaded images */
+    opacity: 0;
   }
 
-  /* Lazy load fade-in effect */
-  .detail-card-image img[loading="lazy"] {
+  .detail-card-image img.loaded,
+  .detail-card-image img:not([loading="lazy"]) {
     opacity: 1;
   }
 
@@ -1440,8 +1494,7 @@ const projects = [
   }
 
   .detail-card[data-gallery-item]:focus {
-    outline: 2px solid var(--color-primary, #007bff);
-    outline-offset: 4px;
+    outline: none;
   }
 
   /* Lightbox Responsive */
