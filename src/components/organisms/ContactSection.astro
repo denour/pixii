@@ -149,12 +149,8 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
             <span class="error-message" id="mensaje-error" role="alert"></span>
           </div>
 
-          <!-- reCAPTCHA v2 -->
-          {recaptchaSiteKey && (
-            <div class="recaptcha-container">
-              <div class="g-recaptcha" data-sitekey={recaptchaSiteKey}></div>
-            </div>
-          )}
+          <!-- reCAPTCHA v3 token -->
+          <input type="hidden" name="g-recaptcha-response" id="recaptcha-token" />
 
           <div class="form-actions">
             <Button type="submit" variant="black">Enviar</Button>
@@ -176,8 +172,13 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   </div>
 </section>
 
-<!-- reCAPTCHA Script -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- reCAPTCHA v3 Script -->
+{recaptchaSiteKey && (
+  <script define:vars={{ recaptchaSiteKey }}>
+    window.RECAPTCHA_SITE_KEY = recaptchaSiteKey;
+  </script>
+)}
+<script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} async defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -328,12 +329,19 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
         return;
       }
 
-      // Check reCAPTCHA
-      const recaptchaContainer = form.querySelector('.g-recaptcha');
-      if (recaptchaContainer && typeof grecaptcha !== 'undefined') {
-        const recaptchaResponse = grecaptcha.getResponse();
-        if (!recaptchaResponse) {
-          alert('Por favor completa el reCAPTCHA para continuar.');
+      // Get reCAPTCHA v3 token
+      const siteKey = (window as any).RECAPTCHA_SITE_KEY;
+      if (siteKey && typeof grecaptcha !== 'undefined') {
+        try {
+          await grecaptcha.ready(async () => {});
+          const token = await grecaptcha.execute(siteKey, { action: 'contact_form' });
+          const tokenInput = document.getElementById('recaptcha-token') as HTMLInputElement;
+          if (tokenInput) {
+            tokenInput.value = token;
+          }
+        } catch (error) {
+          console.error('reCAPTCHA error:', error);
+          alert('Error al verificar reCAPTCHA. Por favor intenta de nuevo.');
           return;
         }
       }
@@ -522,18 +530,6 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   .form-field.material.valid input ~ label,
   .form-field.material.valid textarea ~ label {
     color: #16a34a;
-  }
-
-  /* reCAPTCHA container */
-  .recaptcha-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-  }
-
-  .recaptcha-container .g-recaptcha {
-    transform: scale(0.9);
-    transform-origin: left top;
   }
 
   /* Shake animation for errors */
