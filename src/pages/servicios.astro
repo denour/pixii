@@ -99,6 +99,100 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <!-- Servicios Complementarios Section -->
+  <section class="servicios-complementarios" aria-labelledby="complementarios-heading">
+    <div class="container">
+      <h2 id="complementarios-heading" class="section-title">Servicios Complementarios</h2>
+      <p class="section-subtitle">Proyectos especializados de infraestructura y energía</p>
+
+      <div class="proyectos-grid">
+        <a href="/proyectos#servicios" class="proyecto-card">
+          <div class="proyecto-image">
+            <img
+              src="/images/proyectos/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA01.jpeg"
+              alt="Zuma Parque Eólico Reynosa"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="proyecto-overlay"></div>
+          </div>
+          <div class="proyecto-content">
+            <h3 class="proyecto-title">Zuma Parque Eólico Reynosa</h3>
+            <span class="proyecto-link">
+              Ver galería
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/proyectos#servicios" class="proyecto-card">
+          <div class="proyecto-image">
+            <img
+              src="/images/proyectos/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS01.jpeg"
+              alt="Estacionamiento Solar Collins Aerospace"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="proyecto-overlay"></div>
+          </div>
+          <div class="proyecto-content">
+            <h3 class="proyecto-title">Estacionamiento Solar Collins Aerospace</h3>
+            <span class="proyecto-link">
+              Ver galería
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/proyectos#servicios" class="proyecto-card">
+          <div class="proyecto-image">
+            <img
+              src="/images/proyectos/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO01.jpeg"
+              alt="Red de Alcantarillado Sanitario Lomas Encantadas"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="proyecto-overlay"></div>
+          </div>
+          <div class="proyecto-content">
+            <h3 class="proyecto-title">Red de Alcantarillado Sanitario Lomas Encantadas</h3>
+            <span class="proyecto-link">
+              Ver galería
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/proyectos#servicios" class="proyecto-card">
+          <div class="proyecto-image">
+            <img
+              src="/images/proyectos/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA01.jpeg"
+              alt="Proyecto Ejecutivo Sistema de Bombeo PB6"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="proyecto-overlay"></div>
+          </div>
+          <div class="proyecto-content">
+            <h3 class="proyecto-title">Sistema de Bombeo PB6 (CESPT)</h3>
+            <span class="proyecto-link">
+              Ver galería
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -227,6 +321,149 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .service-description {
       font-size: 14px;
+    }
+  }
+
+  /* Servicios Complementarios Section */
+  .servicios-complementarios {
+    padding: 80px 0;
+    background: #F5F5F5;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+    color: #4A4A4A;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .proyecto-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .proyecto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .proyecto-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .proyecto-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .proyecto-card:hover .proyecto-image img {
+    transform: scale(1.05);
+  }
+
+  .proyecto-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  }
+
+  .proyecto-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .proyecto-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-black);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .proyecto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-primary, #E63946);
+    transition: gap 0.3s ease;
+  }
+
+  .proyecto-card:hover .proyecto-link {
+    gap: 10px;
+  }
+
+  .proyecto-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .proyecto-card:hover .proyecto-link svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .proyectos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .servicios-complementarios {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .proyectos-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .proyecto-content {
+      padding: 16px;
+    }
+
+    .proyecto-title {
+      font-size: 16px;
     }
   }
 </style>
