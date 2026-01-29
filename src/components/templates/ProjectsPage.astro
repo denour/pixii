@@ -415,33 +415,35 @@ const projects = [
 </div>
 
 <!-- Gallery Lightbox -->
-<div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+<div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
   <div class="lightbox-overlay"></div>
   <div class="lightbox-content">
+    <h2 id="lightbox-title" class="sr-only">Galería de imágenes del proyecto</h2>
+
     <button class="lightbox-close" aria-label="Cerrar galería">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
     </button>
 
     <button class="lightbox-nav lightbox-prev" aria-label="Imagen anterior">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M15 18l-6-6 6-6"/>
       </svg>
     </button>
 
-    <div class="lightbox-image-container">
+    <div class="lightbox-image-container" role="group" aria-live="polite">
       <img class="lightbox-image" src="" alt="" />
-      <div class="lightbox-caption"></div>
+      <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <button class="lightbox-nav lightbox-next" aria-label="Imagen siguiente">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M9 18l6-6-6-6"/>
       </svg>
     </button>
 
-    <div class="lightbox-counter"></div>
+    <div class="lightbox-counter" aria-live="polite"></div>
   </div>
 </div>
 
@@ -499,25 +501,35 @@ const projects = [
     const lightboxImage = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
     const lightboxCaption = lightbox?.querySelector('.lightbox-caption');
     const lightboxCounter = lightbox?.querySelector('.lightbox-counter');
-    const lightboxClose = lightbox?.querySelector('.lightbox-close');
-    const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
-    const lightboxNext = lightbox?.querySelector('.lightbox-next');
+    const lightboxClose = lightbox?.querySelector('.lightbox-close') as HTMLButtonElement;
+    const lightboxPrev = lightbox?.querySelector('.lightbox-prev') as HTMLButtonElement;
+    const lightboxNext = lightbox?.querySelector('.lightbox-next') as HTMLButtonElement;
     const lightboxOverlay = lightbox?.querySelector('.lightbox-overlay');
 
     let currentGalleryImages: string[] = [];
     let currentProjectLabel = '';
     let currentIndex = 0;
+    let triggerElement: HTMLElement | null = null;
 
-    function openLightbox(galleryImages: string[], label: string, startIndex: number = 0) {
+    // Focusable elements inside lightbox
+    const focusableElements = [lightboxClose, lightboxPrev, lightboxNext].filter(Boolean) as HTMLElement[];
+
+    function openLightbox(galleryImages: string[], label: string, startIndex: number = 0, trigger?: HTMLElement) {
       currentGalleryImages = galleryImages;
       currentProjectLabel = label;
       currentIndex = startIndex;
+      triggerElement = trigger || null;
       updateLightboxContent();
 
       if (lightbox) {
         lightbox.classList.add('active');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        // Focus close button for accessibility
+        setTimeout(() => {
+          lightboxClose?.focus();
+        }, 100);
       }
     }
 
@@ -526,6 +538,35 @@ const projects = [
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+
+        // Return focus to trigger element
+        if (triggerElement) {
+          triggerElement.focus();
+          triggerElement = null;
+        }
+      }
+    }
+
+    // Focus trap for lightbox
+    function handleFocusTrap(e: KeyboardEvent) {
+      if (!lightbox?.classList.contains('active')) return;
+      if (e.key !== 'Tab') return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
       }
     }
 
@@ -560,7 +601,7 @@ const projects = [
 
         try {
           const galleryImages = JSON.parse(galleryImagesJson) as string[];
-          openLightbox(galleryImages, label, 0);
+          openLightbox(galleryImages, label, 0, card as HTMLElement);
         } catch (e) {
           console.error('Error parsing gallery images:', e);
         }
@@ -581,9 +622,12 @@ const projects = [
     lightboxPrev?.addEventListener('click', showPrevImage);
     lightboxNext?.addEventListener('click', showNextImage);
 
-    // Keyboard navigation
+    // Keyboard navigation and focus trap
     document.addEventListener('keydown', (e) => {
       if (!lightbox?.classList.contains('active')) return;
+
+      // Focus trap
+      handleFocusTrap(e);
 
       switch (e.key) {
         case 'Escape':
@@ -601,6 +645,19 @@ const projects = [
 </script>
 
 <style>
+  /* Screen reader only - visually hidden */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .projects-page {
     min-height: 100vh;
     background: var(--color-white);

@@ -73,7 +73,12 @@ highlightedStates.forEach(stateName => {
 const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class={`mexico-map-container ${className}`} data-interactive={interactive}>
+<div
+  class={`mexico-map-container ${className}`}
+  data-interactive={interactive}
+  role="img"
+  aria-label="Mapa de México mostrando estados con presencia de PIXII"
+>
   <div id={uniqueId} class="mexico-map-svg" set:html={svgContent} />
 </div>
 
@@ -90,6 +95,8 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
           path.classList.add('interactive-state');
           path.classList.add('highlighted');
           path.setAttribute('data-state-name', stateName);
+          path.setAttribute('tabindex', '0');
+          path.setAttribute('role', 'button');
 
           // Crear pin con tooltip
           const pin = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -118,8 +125,11 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
           pin.classList.add('map-pin');
           svg.appendChild(pin);
 
-          // Eventos de hover con glow, scale y pin
-          path.addEventListener('mouseenter', (e) => {
+          // Set aria-label for the state
+          path.setAttribute('aria-label', `Estado: ${stateLabel}`);
+
+          // Function to show pin
+          const showPin = () => {
             path.style.opacity = '0.8';
             path.style.cursor = 'pointer';
             path.style.transform = 'scale(1.01)';
@@ -132,18 +142,28 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
             const centerY = bbox.y + bbox.height / 2 - 49;
             pin.setAttribute('transform', `translate(${centerX}, ${centerY})`);
             pin.style.opacity = '1';
-          });
+          };
 
-          path.addEventListener('mouseleave', (e) => {
+          // Function to hide pin
+          const hidePin = () => {
             path.style.opacity = '1';
             path.style.transform = '';
             path.style.filter = '';
             pin.style.opacity = '0';
-          });
+          };
 
-          // Evento de click (opcional)
-          path.addEventListener('click', (e) => {
-            console.log(`Clicked on: ${stateName}`);
+          // Mouse events
+          path.addEventListener('mouseenter', showPin);
+          path.addEventListener('mouseleave', hidePin);
+
+          // Keyboard events for accessibility
+          path.addEventListener('focus', showPin);
+          path.addEventListener('blur', hidePin);
+          path.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              console.log(`Selected: ${stateName}`);
+            }
           });
         }
       });
@@ -190,10 +210,17 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
     cursor: pointer;
   }
 
-  .mexico-map-svg :global(svg path.interactive-state:hover) {
+  .mexico-map-svg :global(svg path.interactive-state:hover),
+  .mexico-map-svg :global(svg path.interactive-state:focus) {
     transform: scale(1.01);
     transform-origin: center;
     filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.6));
+    outline: none;
+  }
+
+  .mexico-map-svg :global(svg path.interactive-state:focus-visible) {
+    outline: 2px solid #E63946;
+    outline-offset: 2px;
   }
 
   /* Animación de entrada */

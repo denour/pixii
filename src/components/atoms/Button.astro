@@ -3,12 +3,13 @@ interface Props {
   variant?: 'red' | 'white' | 'black';
   type?: 'button' | 'submit';
   class?: string;
+  ariaLabel?: string;
 }
 
-const { variant = 'red', type = 'button', class: className } = Astro.props;
+const { variant = 'red', type = 'button', class: className, ariaLabel } = Astro.props;
 ---
 
-<button type={type} class:list={['btn', `btn-${variant}`, className]}>
+<button type={type} class:list={['btn', `btn-${variant}`, className]} aria-label={ariaLabel}>
   <slot />
 </button>
 

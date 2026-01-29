@@ -13,56 +13,89 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="servicios-content">
+  <section class="servicios-content" aria-labelledby="services-heading">
+    <h2 id="services-heading" class="sr-only">Nuestros servicios</h2>
     <div class="container">
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">⚡</div>
+      <div class="services-grid" role="list">
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
           <h3 class="service-title">Suministro de Equipos</h3>
           <p class="service-description">
             Proveemos equipos eléctricos de potencia de las mejores marcas internacionales, garantizando calidad y eficiencia en cada proyecto.
           </p>
-        </div>
+        </article>
 
-        <div class="service-card">
-          <div class="service-icon">🔧</div>
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+            </svg>
+          </div>
           <h3 class="service-title">Implementación</h3>
           <p class="service-description">
             Instalación y puesta en marcha de sistemas eléctricos completos, asegurando el correcto funcionamiento y cumplimiento de normativas.
           </p>
-        </div>
+        </article>
 
-        <div class="service-card">
-          <div class="service-icon">📊</div>
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
           <h3 class="service-title">Consultoría Técnica</h3>
           <p class="service-description">
             Asesoría especializada para optimizar tus sistemas eléctricos, mejorar eficiencia energética y reducir costos operativos.
           </p>
-        </div>
+        </article>
 
-        <div class="service-card">
-          <div class="service-icon">🛠️</div>
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
           <h3 class="service-title">Mantenimiento</h3>
           <p class="service-description">
             Programas de mantenimiento preventivo y correctivo para garantizar la continuidad operativa de tus equipos eléctricos.
           </p>
-        </div>
+        </article>
 
-        <div class="service-card">
-          <div class="service-icon">🌐</div>
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
           <h3 class="service-title">Internacionalización</h3>
           <p class="service-description">
             Expandimos tu alcance comercial conectándote con mercados globales mediante estrategias personalizadas de comercio exterior.
           </p>
-        </div>
+        </article>
 
-        <div class="service-card">
-          <div class="service-icon">🚚</div>
+        <article class="service-card" role="listitem">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
           <h3 class="service-title">Logística Integrada</h3>
           <p class="service-description">
             Gestión completa de la cadena de suministro, desde el origen hasta la entrega final, con seguimiento en tiempo real.
           </p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -116,8 +149,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .service-icon {
-    font-size: 48px;
     margin-bottom: 20px;
+    color: var(--color-primary, #E63946);
+  }
+
+  .service-icon svg {
+    width: 48px;
+    height: 48px;
   }
 
   .service-title {
@@ -130,7 +168,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .service-description {
     font-size: 15px;
     line-height: 1.7;
-    color: #666666;
+    color: #4A4A4A;
+  }
+
+  /* Screen reader only - visually hidden */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (max-width: 1024px) {
@@ -165,8 +216,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       padding: 30px 24px;
     }
 
-    .service-icon {
-      font-size: 40px;
+    .service-icon svg {
+      width: 40px;
+      height: 40px;
     }
 
     .service-title {

@@ -366,11 +366,33 @@ const slides = [
     cursor: pointer;
     padding: 0;
     transition: all 0.3s ease;
+    /* Larger touch target */
+    position: relative;
+  }
+
+  /* Invisible touch target expansion */
+  .dot-inside::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
   }
 
   .dot-inside:hover {
     background: rgba(0, 0, 0, 0.5);
     transform: scale(1.15);
+  }
+
+  .dot-inside:focus {
+    outline: none;
+  }
+
+  .dot-inside:focus-visible {
+    outline: 2px solid #E63946;
+    outline-offset: 4px;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .dot-inside.active {
