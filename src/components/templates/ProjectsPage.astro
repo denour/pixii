@@ -4,7 +4,7 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Proyectos PIXII",
-  "description": "Proyectos de subestaciones eléctricas, centrales de generación y redes de transmisión",
+  "description": "Proyectos de subestaciones eléctricas, centrales de generación, redes de transmisión y servicios complementarios",
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
@@ -17,54 +17,308 @@ const schemaData = {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Centrales Eléctricas",
+        "name": "Centrales Eléctricas de Generación",
         "description": "Proyectos de centrales de generación eléctrica"
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Redes Eléctricas y Líneas de Transmisión",
+        "name": "Redes Eléctricas",
         "description": "Proyectos de redes eléctricas y líneas de transmisión"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Servicios Complementarios",
+        "description": "Proyectos de servicios complementarios de infraestructura"
       }
     ]
   }
 };
 
+// Base path for project images
+const basePath = '/images/proyectos';
+
+// Project data structure with real images
 const projects = [
   {
     id: 'subestaciones',
     title: 'Subestaciones Eléctricas',
     subtitle: 'para Carga, Distribución, Transmisión.',
-    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&h=600&fit=crop',
+    image: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT01.jpeg`,
     items: [
-      { image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop', label: 'Subestación de Carga Industrial' },
-      { image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop', label: 'Subestación de Distribución' },
-      { image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop', label: 'Subestación de Transmisión' },
-      { image: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?w=600&h=400&fit=crop', label: 'Subestación Compacta' }
+      {
+        label: 'Subestación Panamericana - Aluminio de BC',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA06.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA07.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA08.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PANAMERICANA/01SE - SCABC - SUBESTACIONPANAMERICANA09.jpeg`
+        ]
+      },
+      {
+        label: 'Subestación Puerto Nuevo - Aluminio de BC',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACIONES COLATERALES ALUMINIO DE BC/SUBESTACION PUERTO NUEVO/01SE - SCABC - SUBESTACIONPUERTONUEVO06.jpeg`
+        ]
+      },
+      {
+        label: 'Subestación Navojoa Industrial',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIALS03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL06.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION NAVOJOA INDUSTRIAL/01SE - NAVOJOAINDUSTRIAL07.jpeg`
+        ]
+      },
+      {
+        label: 'Subestación Tres Naciones S.L.P. Daikin',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN06.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION TRES NACIONES S.L.P. DAIKIN/01SE - TRESNACIONESSLPDAIKIN07.jpeg`
+        ]
+      },
+      {
+        label: 'Subestación Punta Bandera CESPT',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT06.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT07.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT08.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT09.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT10.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT11.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION PUNTA BANDERA CESPT/01SE - PUNTABANDERACESPT12.jpeg`
+        ]
+      },
+      {
+        label: 'Subestación de Alta Tensión Alaris',
+        thumbnail: `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS01.jpeg`,
+        gallery: [
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS01.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS02.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS03.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS04.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS05.jpeg`,
+          `${basePath}/01 SUBESTACIONES ELECTRICAS/SUBESTACION DE ALTA TENSION ALARIS/01SE - ALTATENSIONALARIS06.jpeg`
+        ]
+      }
     ]
   },
   {
     id: 'centrales',
     title: 'Centrales Eléctricas',
     subtitle: 'de Generación',
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&h=600&fit=crop',
+    image: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY01.jpeg`,
     items: [
-      { image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop', label: 'Central Solar Fotovoltaica' },
-      { image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop', label: 'Central Eólica' },
-      { image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop', label: 'Central Hidroeléctrica' },
-      { image: 'https://images.unsplash.com/photo-1570449722773-2e9be8c56a10?w=600&h=400&fit=crop', label: 'Central Térmica' }
+      {
+        label: 'PV 499 KWP Industrias Falcon (P.I. Amexhe)',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PV 499 KWP INDUSTRIAS FALCON (P.I. AMEXHE)/02CEG - PV499KWPINDUSTRIASFALCON05.jpeg`
+        ]
+      },
+      {
+        label: 'Planta de Generación Thompson',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON05.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON06.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON07.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENRACION THOMPSON/02CEG - PLANTADEGENERACIONTHOMPSON08.jpeg`
+        ]
+      },
+      {
+        label: 'Planta de Generación González Ortega',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA05.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION ¨GONZALEZ ORTEGA¨/02CEG - PLANTADEGENERACIONGONZALEZORTEGA06.jpeg`
+        ]
+      },
+      {
+        label: 'Planta de Generación Libramiento',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE GENERACION LIBRAMIENTO/02CEG - PLANTADEGENERACIONLIBRAMIENTO05.jpeg`
+        ]
+      },
+      {
+        label: 'Planta de Tratamiento de Agua Las Arenitas',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE TRATAMIENTO DE AGUA¨LAS ARENITAS/02CEG - PLANTADETRATAMIENTODEAGUAARENITAS01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE TRATAMIENTO DE AGUA¨LAS ARENITAS/02CEG - PLANTADETRATAMIENTODEAGUAARENITAS01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/PLANTA DE TRATAMIENTO DE AGUA¨LAS ARENITAS/02CEG - PLANTADETRATAMIENTODEAGUAARENITAS02.jpeg`
+        ]
+      },
+      {
+        label: 'Estacionamiento Solar (Carport) Gobierno de B.C.',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR05.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR06.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR07.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR08.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR09.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR (CARPOT) GOBIERNO DE B.C/02CEG - ESTACIONAMIENTOSOLAR10.jpeg`
+        ]
+      },
+      {
+        label: 'CTG New Fortress Energy Pichilingue B.C. Sur',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY03.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY04.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY05.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY06.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY07.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY08.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY09.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY10.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY11.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY12.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY13.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/CTG NEW FORTRESS ENERGY ¨PICHILINGUE B.C. SUR¨/02CEG - CTGNEWFORTRESSENERGY14.jpeg`
+        ]
+      },
+      {
+        label: 'Estacionamiento Solar Valle de las Palmas',
+        thumbnail: `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR VALLE DE LAS PALMAS/02CEG - ESTACIONAMIENTOSOLARVALLE01.jpeg`,
+        gallery: [
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR VALLE DE LAS PALMAS/02CEG - ESTACIONAMIENTOSOLARVALLE01.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR VALLE DE LAS PALMAS/02CEG - ESTACIONAMIENTOSOLARVALLE02.jpeg`,
+          `${basePath}/02 CENTRALES ELECTRICAS DE GENERACION/ESTACIONAMIENTO SOLAR VALLE DE LAS PALMAS/02CEG - ESTACIONAMIENTOSOLARVALLE03.jpeg`
+        ]
+      }
     ]
   },
   {
     id: 'redes',
-    title: 'Redes Eléctricas y Líneas de Transmisión',
-    subtitle: '',
+    title: 'Redes Eléctricas',
+    subtitle: 'y Líneas de Transmisión',
     image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1920&h=600&fit=crop',
     items: [
-      { image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop', label: 'Línea de Alta Tensión' },
-      { image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop', label: 'Línea de Media Tensión' },
-      { image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop', label: 'Red de Distribución' },
-      { image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop', label: 'Interconexión Regional' }
+      {
+        label: 'LT 115KV Aluminio ABC',
+        thumbnail: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop',
+        gallery: ['https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1200&h=800&fit=crop']
+      },
+      {
+        label: 'LT 115KV KIO Networks',
+        thumbnail: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop',
+        gallery: ['https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=800&fit=crop']
+      }
+    ]
+  },
+  {
+    id: 'servicios',
+    title: 'Servicios Complementarios',
+    subtitle: '',
+    image: `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA01.jpeg`,
+    items: [
+      {
+        label: 'Zuma Parque Eólico Reynosa',
+        thumbnail: `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA01.jpeg`,
+        gallery: [
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA01.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA02.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA03.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA04.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA05.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA06.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA07.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA08.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA09.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA10.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA11.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA12.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA13.jpeg`
+        ]
+      },
+      {
+        label: 'Estacionamiento Solar Collins Aerospace',
+        thumbnail: `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS01.jpeg`,
+        gallery: [
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS01.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS02.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS03.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS04.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS05.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/ESTACIONAMIENTO SOLAR COLLINS AEROSPACE/04SC - ESTACIONAMIENTOSOLARCOLLINS06.jpeg`
+        ]
+      },
+      {
+        label: 'Red de Alcantarillado Sanitario Lomas Encantadas (CESPMT)',
+        thumbnail: `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO01.jpeg`,
+        gallery: [
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO01.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO02.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO03.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO04.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO05.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/RED DE ALCANTARILLADO SANITARIO LOMAS ENCANTADAS (CESPMT)/04SC - REDDEALCANTARILLADOSANITARIO06.jpeg`
+        ]
+      },
+      {
+        label: 'Proyecto Ejecutivo Sistema de Bombeo PB6 (CESPT)',
+        thumbnail: `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA01.jpeg`,
+        gallery: [
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA01.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA02.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA03.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA04.jpeg`,
+          `${basePath}/04 SERVICIOS COMPLEMENTARIOS/PROYECTO EJECUTIVO SISTEMA DE BOMBEA PB6 (CESPT)/04SC - PROYECTOEJECUTIVOSISTEMADEBOMBEA05.jpeg`
+        ]
+      }
     ]
   }
 ];
@@ -135,13 +389,13 @@ const projects = [
               role="listitem"
               data-gallery-item
               data-index={itemIndex}
-              data-image={item.image.replace('w=600&h=400', 'w=1200&h=800')}
+              data-gallery-images={JSON.stringify(item.gallery)}
               data-label={item.label}
               tabindex="0"
             >
               <div class="detail-card-image">
                 <img
-                  src={item.image}
+                  src={item.thumbnail}
                   alt={item.label}
                   width="300"
                   height="400"
@@ -250,12 +504,14 @@ const projects = [
     const lightboxNext = lightbox?.querySelector('.lightbox-next');
     const lightboxOverlay = lightbox?.querySelector('.lightbox-overlay');
 
-    let currentGalleryItems: HTMLElement[] = [];
+    let currentGalleryImages: string[] = [];
+    let currentProjectLabel = '';
     let currentIndex = 0;
 
-    function openLightbox(galleryItems: HTMLElement[], index: number) {
-      currentGalleryItems = galleryItems;
-      currentIndex = index;
+    function openLightbox(galleryImages: string[], label: string, startIndex: number = 0) {
+      currentGalleryImages = galleryImages;
+      currentProjectLabel = label;
+      currentIndex = startIndex;
       updateLightboxContent();
 
       if (lightbox) {
@@ -274,38 +530,40 @@ const projects = [
     }
 
     function updateLightboxContent() {
-      const item = currentGalleryItems[currentIndex];
-      if (!item || !lightboxImage || !lightboxCaption || !lightboxCounter) return;
+      if (!lightboxImage || !lightboxCaption || !lightboxCounter) return;
 
-      const imageSrc = item.getAttribute('data-image') || '';
-      const label = item.getAttribute('data-label') || '';
+      const imageSrc = currentGalleryImages[currentIndex] || '';
 
       lightboxImage.src = imageSrc;
-      lightboxImage.alt = label;
-      lightboxCaption.textContent = label;
-      lightboxCounter.textContent = `${currentIndex + 1} / ${currentGalleryItems.length}`;
+      lightboxImage.alt = `${currentProjectLabel} - Imagen ${currentIndex + 1}`;
+      lightboxCaption.textContent = currentProjectLabel;
+      lightboxCounter.textContent = `${currentIndex + 1} / ${currentGalleryImages.length}`;
     }
 
     function showPrevImage() {
-      currentIndex = (currentIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+      currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
       updateLightboxContent();
     }
 
     function showNextImage() {
-      currentIndex = (currentIndex + 1) % currentGalleryItems.length;
+      currentIndex = (currentIndex + 1) % currentGalleryImages.length;
       updateLightboxContent();
     }
 
     // Event listeners for gallery items
     document.querySelectorAll('.detail-card[data-gallery-item]').forEach(card => {
       const openGallery = () => {
-        const grid = card.closest('.detail-grid');
-        if (!grid) return;
+        const galleryImagesJson = card.getAttribute('data-gallery-images');
+        const label = card.getAttribute('data-label') || '';
 
-        const galleryItems = Array.from(grid.querySelectorAll('[data-gallery-item]')) as HTMLElement[];
-        const index = parseInt(card.getAttribute('data-index') || '0', 10);
+        if (!galleryImagesJson) return;
 
-        openLightbox(galleryItems, index);
+        try {
+          const galleryImages = JSON.parse(galleryImagesJson) as string[];
+          openLightbox(galleryImages, label, 0);
+        } catch (e) {
+          console.error('Error parsing gallery images:', e);
+        }
       };
 
       card.addEventListener('click', openGallery);
@@ -428,11 +686,15 @@ const projects = [
   }
 
   .project-card:nth-child(2) .card-overlay {
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.55);
   }
 
   .project-card:nth-child(3) .card-overlay {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .project-card:nth-child(4) .card-overlay {
+    background: rgba(0, 0, 0, 0.35);
   }
 
   .project-card:nth-child(1):hover .card-overlay {
@@ -440,11 +702,15 @@ const projects = [
   }
 
   .project-card:nth-child(2):hover .card-overlay {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
   }
 
   .project-card:nth-child(3):hover .card-overlay {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .project-card:nth-child(4):hover .card-overlay {
+    background: rgba(0, 0, 0, 0.2);
   }
 
   .card-content {
