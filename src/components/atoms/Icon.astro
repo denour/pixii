@@ -5,7 +5,7 @@ interface Props {
   size?: number;
 }
 
-const { name, color = '#E63946', size = 16 } = Astro.props;
+const { name, color = '#fd2c00', size = 16 } = Astro.props;
 
 const icons = {
   'mail': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8l9 6 9-6"/>',
@@ -17,47 +17,25 @@ const icons = {
 
 // WhatsApp usa fill en lugar de stroke
 const useFill = name === 'whatsapp';
-// Instagram no tiene fondo y usa stroke
-const isInstagram = name === 'instagram';
-// Color del ícono: Instagram es rojo, los demás blancos
-const iconColor = isInstagram ? '#E63946' : '#FFFFFF';
+// Todos los íconos usan color blanco con fondo rojo
+const iconColor = '#FFFFFF';
 ---
 
-{!isInstagram && (
-  <div class="icon-wrapper with-background">
-    <svg
-      class="icon"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill={useFill ? iconColor : 'none'}
-      stroke={useFill ? 'none' : iconColor}
-      stroke-width={useFill ? '0' : '2'}
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <Fragment set:html={icons[name]} />
-    </svg>
-  </div>
-)}
-
-{isInstagram && (
-  <div class="icon-wrapper no-background">
-    <svg
-      class="icon"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={iconColor}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <Fragment set:html={icons[name]} />
-    </svg>
-  </div>
-)}
+<div class="icon-wrapper with-background">
+  <svg
+    class="icon"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill={useFill ? iconColor : 'none'}
+    stroke={useFill ? 'none' : iconColor}
+    stroke-width={useFill ? '0' : '2'}
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <Fragment set:html={icons[name]} />
+  </svg>
+</div>
 
 <style is:global>
   .icon-wrapper {
@@ -73,7 +51,7 @@ const iconColor = isInstagram ? '#E63946' : '#FFFFFF';
   }
 
   .with-background {
-    background-color: #E63946 !important;
+    background-color: #fd2c00 !important;
     border-radius: 50% !important;
   }
 

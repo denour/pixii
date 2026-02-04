@@ -164,6 +164,10 @@ const slides = [
   }
 
   function startAutoplay() {
+    // Siempre limpiar cualquier timer existente antes de crear uno nuevo
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+    }
     autoplayTimer = setInterval(nextSlide, 5000);
   }
 
@@ -201,7 +205,7 @@ const slides = [
   // Pause on hover
   const hero = document.querySelector('.hero');
   hero?.addEventListener('mouseenter', stopAutoplay);
-  hero?.addEventListener('mouseleave', startAutoplay);
+  hero?.addEventListener('mouseleave', resetAutoplay);
 
   // Start autoplay
   startAutoplay();
@@ -390,13 +394,13 @@ const slides = [
   }
 
   .dot-inside:focus-visible {
-    outline: 2px solid #E63946;
+    outline: 2px solid #fd2c00;
     outline-offset: 4px;
     background: rgba(0, 0, 0, 0.5);
   }
 
   .dot-inside.active {
-    background: #E63946;
+    background: #fd2c00;
     width: 10px;
     height: 10px;
   }

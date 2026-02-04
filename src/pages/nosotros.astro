@@ -311,6 +311,14 @@ const organizationSchema = {
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 1400px;
+    background-attachment: fixed;
+  }
+
+  /* Disable parallax on mobile for better performance */
+  @supports (-webkit-touch-callout: none) {
+    .mission-vision-section {
+      background-attachment: scroll;
+    }
   }
 
   .values-content {
@@ -635,6 +643,7 @@ const organizationSchema = {
 
     .mission-vision-section {
       padding: 50px 0;
+      background-attachment: scroll;
     }
 
     .mv-content {

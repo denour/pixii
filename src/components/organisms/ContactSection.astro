@@ -410,8 +410,22 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 1400px;
+    background-attachment: fixed;
     padding: var(--spacing-3xl) 0;
     padding-top: 140px;
+  }
+
+  /* Disable parallax on mobile for better performance */
+  @supports (-webkit-touch-callout: none) {
+    .contact-section {
+      background-attachment: scroll;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .contact-section {
+      background-attachment: scroll;
+    }
   }
 
   .contact-grid {
@@ -489,7 +503,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
   .form-field.material input:focus,
   .form-field.material textarea:focus {
-    border-bottom-color: #E63946;
+    border-bottom-color: #fd2c00;
   }
 
   .form-field.material input:focus ~ label,
@@ -498,7 +512,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   .form-field.material textarea:valid ~ label {
     top: -18px;
     font-size: 12px;
-    color: #E63946;
+    color: #fd2c00;
   }
 
   .form-field.material .focus-border {
@@ -507,7 +521,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #E63946;
+    background-color: #fd2c00;
     transition: width 0.3s ease;
   }
 
@@ -519,28 +533,23 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   /* Error state */
   .form-field.material.error input,
   .form-field.material.error textarea {
-    border-bottom-color: #E63946;
+    border-bottom-color: #fd2c00;
   }
 
   .form-field.material.error label {
-    color: #E63946;
+    color: #fd2c00;
+    top: -18px;
+    font-size: 12px;
   }
 
   .form-field.material.error .focus-border {
-    background-color: #E63946;
-  }
-
-  .form-field.material.error input:focus ~ label,
-  .form-field.material.error input:valid ~ label,
-  .form-field.material.error textarea:focus ~ label,
-  .form-field.material.error textarea:valid ~ label {
-    color: #E63946;
+    background-color: #fd2c00;
   }
 
   .error-message {
     display: block;
     font-size: 12px;
-    color: #E63946;
+    color: #fd2c00;
     margin-top: 6px;
     min-height: 18px;
     line-height: 1.4;
@@ -618,7 +627,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   .success-icon {
     width: 120px;
     height: 120px;
-    background-color: #E63946;
+    background-color: #fd2c00;
     border-radius: 50%;
     display: flex;
     align-items: center;
