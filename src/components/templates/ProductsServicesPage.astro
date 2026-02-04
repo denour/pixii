@@ -201,46 +201,157 @@ const categories = [
       data-section={category.id}
       aria-labelledby={`title-${category.id}`}
     >
-      <div class="container">
-        <h2 id={`title-${category.id}`} class="detail-title">{category.title}</h2>
+      <div class={category.id === 'servicios' ? 'container servicios-layout' : 'container'}>
+        {category.id === 'servicios' && (
+          <aside class="servicios-sidebar">
+            <h2 class="sidebar-title">Servicios</h2>
+            <ul class="sidebar-list">
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Ingeniería y diseño eléctrico</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Diseño de subestaciones eléctricas</li>
+                    <li>Estudios de coordinación de protecciones</li>
+                    <li>Análisis de sistemas de potencia</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Gestión de proyecto ante autoridades</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Trámites ante CFE y CENACE</li>
+                    <li>Permisos de construcción</li>
+                    <li>Gestión de licencias ambientales</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Infraestructura civil</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Mallas de tierra</li>
+                    <li>Bases, caminos</li>
+                    <li>Canalizaciones de cableado subterráneo</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Obra civil y electromecánica</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Montaje de equipos de potencia</li>
+                    <li>Instalación de transformadores</li>
+                    <li>Tendido de cables de alta tensión</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Fabricación de estructura para subestaciones eléctricas</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Estructuras metálicas galvanizadas</li>
+                    <li>Soportería para equipos</li>
+                    <li>Herrajes y accesorios</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-item" data-accordion-item>
+                <button class="sidebar-item-header" aria-expanded="false">
+                  <span>Pruebas eléctricas, arranque y puesta en operación comercial</span>
+                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="sidebar-item-content">
+                  <ul class="sidebar-item-list">
+                    <li>Pruebas de aislamiento y resistencia</li>
+                    <li>Comisionamiento de equipos</li>
+                    <li>Puesta en servicio y energización</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        )}
 
-        <div
-          class="detail-grid"
-          role="list"
-          data-gallery={category.id}
-          data-shared-gallery={category.sharedGallery ? 'true' : 'false'}
-          data-gallery-images={category.sharedGallery ? JSON.stringify(category.galleryData.images) : ''}
-          data-gallery-labels={category.sharedGallery ? JSON.stringify(category.galleryData.labels) : ''}
-        >
-          {category.items.map((item, itemIndex) => (
-            <article
-              class="detail-card"
-              role="listitem"
-              data-gallery-item
-              data-index={itemIndex}
-              data-gallery-images={!category.sharedGallery && item.gallery ? JSON.stringify(item.gallery) : ''}
-              data-label={item.label}
-              tabindex="0"
-              itemscope
-              itemtype="https://schema.org/Product"
-            >
-              <div class="detail-card-image">
-                <img
-                  src={item.thumbnail}
-                  alt={`${item.label} - PIXII ${category.title}`}
-                  width="400"
-                  height="533"
-                  loading="lazy"
-                  decoding="async"
-                  itemprop="image"
-                />
-              </div>
-              <div class="detail-card-content">
-                <h3 class="detail-card-title" itemprop="name">{item.label}</h3>
-                {item.description && <p class="detail-card-description" itemprop="description">{item.description}</p>}
-              </div>
-            </article>
-          ))}
+        <div class={category.id === 'servicios' ? 'servicios-content' : ''}>
+          {category.id !== 'servicios' && <h2 id={`title-${category.id}`} class="detail-title">{category.title}</h2>}
+
+          <div
+            class="detail-grid"
+            role="list"
+            data-gallery={category.id}
+            data-shared-gallery={category.sharedGallery ? 'true' : 'false'}
+            data-gallery-images={category.sharedGallery ? JSON.stringify(category.galleryData.images) : ''}
+            data-gallery-labels={category.sharedGallery ? JSON.stringify(category.galleryData.labels) : ''}
+          >
+            {category.items.map((item, itemIndex) => (
+              <article
+                class="detail-card"
+                role="listitem"
+                data-gallery-item
+                data-index={itemIndex}
+                data-gallery-images={!category.sharedGallery && item.gallery ? JSON.stringify(item.gallery) : ''}
+                data-label={item.label}
+                tabindex="0"
+                itemscope
+                itemtype="https://schema.org/Product"
+              >
+                <div class="detail-card-image">
+                  <img
+                    src={item.thumbnail}
+                    alt={`${item.label} - PIXII ${category.title}`}
+                    width="400"
+                    height="533"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                  />
+                </div>
+                <div class="detail-card-content">
+                  <h3 class="detail-card-title" itemprop="name">{item.label}</h3>
+                  {item.description && <p class="detail-card-description" itemprop="description">{item.description}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {category.id === 'servicios' && (
+            <div class="servicios-ver-mas">
+              <button class="ver-mas-btn" data-servicios-gallery aria-label="Ver más imágenes de servicios">
+                Ver más
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -307,6 +418,40 @@ const categories = [
       } else {
         img.addEventListener('load', () => {
           img.classList.add('loaded');
+        });
+      }
+    });
+
+    // ============================================
+    // Servicios Sidebar Accordion
+    // ============================================
+    const accordionItems = document.querySelectorAll('[data-accordion-item]');
+    accordionItems.forEach(item => {
+      const header = item.querySelector('.sidebar-item-header') as HTMLButtonElement;
+      const content = item.querySelector('.sidebar-item-content') as HTMLElement;
+
+      if (header && content) {
+        header.addEventListener('click', () => {
+          const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+          // Close all other accordions
+          accordionItems.forEach(otherItem => {
+            const otherHeader = otherItem.querySelector('.sidebar-item-header') as HTMLButtonElement;
+            const otherContent = otherItem.querySelector('.sidebar-item-content') as HTMLElement;
+            if (otherHeader && otherContent && otherItem !== item) {
+              otherHeader.setAttribute('aria-expanded', 'false');
+              otherContent.style.maxHeight = '0';
+            }
+          });
+
+          // Toggle current accordion
+          if (isExpanded) {
+            header.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = '0';
+          } else {
+            header.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
         });
       }
     });
@@ -525,6 +670,38 @@ const categories = [
         }
       });
     });
+
+    // Ver más button for servicios gallery
+    const verMasBtn = document.querySelector('[data-servicios-gallery]');
+    if (verMasBtn) {
+      verMasBtn.addEventListener('click', () => {
+        const serviciosGrid = document.querySelector('#servicios .detail-grid');
+        if (serviciosGrid) {
+          // Collect all images from individual service items
+          const items = serviciosGrid.querySelectorAll('[data-gallery-item]');
+          const allImages: string[] = [];
+          const allLabels: string[] = [];
+
+          items.forEach(item => {
+            const itemImages = item.getAttribute('data-gallery-images');
+            const label = item.getAttribute('data-label') || '';
+            if (itemImages) {
+              try {
+                const parsed = JSON.parse(itemImages) as string[];
+                parsed.forEach(img => {
+                  allImages.push(img);
+                  allLabels.push(label);
+                });
+              } catch {}
+            }
+          });
+
+          if (allImages.length > 0) {
+            openLightboxWithLabels(allImages, allLabels, 0, verMasBtn as HTMLElement);
+          }
+        }
+      });
+    }
 
     // Lightbox controls
     lightboxClose?.addEventListener('click', closeLightbox);
@@ -757,10 +934,18 @@ const categories = [
   .category-detail {
     padding: 80px 0;
     background-image: url('/images/background.png');
-    background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 1400px;
+    background-attachment: fixed;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  /* Disable parallax on mobile for better performance */
+  @supports (-webkit-touch-callout: none) {
+    .category-detail {
+      background-attachment: scroll;
+    }
   }
 
   .detail-title {
@@ -853,6 +1038,174 @@ const categories = [
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.5;
     margin: 0;
+  }
+
+  /* ============================================
+     Servicios Sidebar Styles
+     ============================================ */
+  .servicios-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .servicios-sidebar {
+    width: 320px;
+    min-width: 320px;
+    background: rgba(128, 128, 128, 0.5);
+    border-radius: 12px;
+    padding: 24px;
+    position: sticky;
+    top: 120px;
+  }
+
+  .sidebar-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin: 0 0 20px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar-item {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .sidebar-item-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: #4a4a4a;
+    border: none;
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+  }
+
+  .sidebar-item-header:hover {
+    background: #5a5a5a;
+  }
+
+  .sidebar-item-header[aria-expanded="true"] {
+    background: #3a3a3a;
+  }
+
+  .accordion-icon {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .sidebar-item-header[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  .sidebar-item-content {
+    max-height: 0;
+    overflow: hidden;
+    background: var(--color-white);
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-item-content p {
+    padding: 16px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-black);
+  }
+
+  .sidebar-item-list {
+    padding: 16px 16px 16px 32px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--color-black);
+    list-style: disc;
+  }
+
+  .sidebar-item-list li {
+    margin-bottom: 4px;
+  }
+
+  .sidebar-item-list li::marker {
+    color: var(--color-black);
+  }
+
+  .sidebar-item-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .servicios-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .servicios-content .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 500px;
+  }
+
+  .servicios-content .detail-card {
+    border-radius: 0;
+  }
+
+  .servicios-content .detail-card-content {
+    display: none;
+  }
+
+  .servicios-content .detail-card-image {
+    aspect-ratio: 1 / 1;
+  }
+
+  .servicios-ver-mas {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    max-width: 500px;
+  }
+
+  .ver-mas-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: var(--color-black);
+    border: none;
+    border-radius: 50px;
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ver-mas-btn:hover {
+    background: #333;
+  }
+
+  .ver-mas-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .ver-mas-btn:hover svg {
+    transform: translateX(4px);
   }
 
   /* ============================================
@@ -986,6 +1339,17 @@ const categories = [
     .detail-card-image {
       aspect-ratio: 3 / 4;
     }
+
+    /* Servicios sidebar responsive */
+    .servicios-sidebar {
+      width: 280px;
+      min-width: 280px;
+      padding: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 22px;
+    }
   }
 
   /* Tablet Portrait (768px - 899px) */
@@ -1055,6 +1419,19 @@ const categories = [
     .detail-card-description {
       font-size: 10px;
     }
+
+    /* Servicios sidebar responsive */
+    .servicios-layout {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .servicios-sidebar {
+      width: 100%;
+      min-width: 100%;
+      position: static;
+    }
+
   }
 
   /* Large Mobile / Small Tablet (600px - 767px) */
@@ -1107,6 +1484,7 @@ const categories = [
 
     .category-detail {
       padding: 48px 0;
+      background-attachment: scroll;
     }
 
     .detail-title {
@@ -1135,6 +1513,27 @@ const categories = [
     .detail-card-description {
       font-size: 10px;
     }
+
+    /* Servicios sidebar mobile */
+    .servicios-sidebar {
+      padding: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .sidebar-item-header {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .sidebar-item-content p {
+      padding: 14px;
+      font-size: 13px;
+    }
+
   }
 
   /* Mobile (480px - 599px) */
@@ -1207,6 +1606,26 @@ const categories = [
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+
+    /* Servicios sidebar mobile */
+    .servicios-sidebar {
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .sidebar-title {
+      font-size: 18px;
+    }
+
+    .sidebar-item-header {
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .sidebar-item-content p {
+      padding: 12px;
+      font-size: 12px;
     }
   }
 

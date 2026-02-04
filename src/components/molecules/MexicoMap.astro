@@ -12,7 +12,7 @@ interface Props {
 
 const {
   highlightedStates = [],
-  highlightColor = '#E63946',
+  highlightColor = '#fd2c00',
   defaultColor = '#b9b9b9',
   interactive = true,
   class: className = ''
@@ -112,7 +112,13 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
           const stateLabel = stateCities[stateName] || stateName.replace(/_/g, ' ').toUpperCase();
           const textWidth = stateLabel.length * 8; // Aproximado
           const boxWidth = textWidth + 32; // Padding de 16px a cada lado
-          const boxX = 40; // Translapado con el pin
+
+          // Offset para estados que necesitan más separación
+          const stateOffsets = {
+            'nuevo_leon': 55,
+            'queretaro': 55
+          };
+          const boxX = stateOffsets[stateName] || 40; // Translapado con el pin
 
           pin.innerHTML = `
             <rect x="${boxX}" y="15" width="${boxWidth}" height="30" rx="4" fill="#000000" fill-opacity="0.5"/>
@@ -134,7 +140,7 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
             path.style.cursor = 'pointer';
             path.style.transform = 'scale(1.01)';
             path.style.transformOrigin = 'center';
-            path.style.filter = 'drop-shadow(0 0 8px rgba(230, 57, 70, 0.6))';
+            path.style.filter = 'drop-shadow(0 0 8px rgba(253, 44, 0, 0.6))';
 
             // Posicionar y mostrar pin en el centro del estado
             const bbox = path.getBBox();
@@ -201,8 +207,8 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   .mexico-map-svg :global(svg path.highlighted) {
-    fill: #E63946;
-    stroke: #c4303b;
+    fill: #fd2c00;
+    stroke: #d42600;
   }
 
   .mexico-map-svg :global(svg path.interactive-state) {
@@ -214,12 +220,12 @@ const uniqueId = `mexico-map-${Math.random().toString(36).substr(2, 9)}`;
   .mexico-map-svg :global(svg path.interactive-state:focus) {
     transform: scale(1.01);
     transform-origin: center;
-    filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.6));
+    filter: drop-shadow(0 0 8px rgba(253, 44, 0, 0.6));
     outline: none;
   }
 
   .mexico-map-svg :global(svg path.interactive-state:focus-visible) {
-    outline: 2px solid #E63946;
+    outline: 2px solid #fd2c00;
     outline-offset: 2px;
   }
 
