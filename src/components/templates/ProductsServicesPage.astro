@@ -206,44 +206,21 @@ const categories = [
           <aside class="servicios-sidebar">
             <h2 class="sidebar-title">Servicios</h2>
             <ul class="sidebar-list">
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item">
+                <div class="sidebar-item-header">
                   <span>Ingeniería y diseño eléctrico</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
-                  <ul class="sidebar-item-list">
-                    <li>Diseño de subestaciones eléctricas</li>
-                    <li>Estudios de coordinación de protecciones</li>
-                    <li>Análisis de sistemas de potencia</li>
-                  </ul>
                 </div>
               </li>
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item">
+                <div class="sidebar-item-header">
                   <span>Gestión de proyecto ante autoridades</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
-                  <ul class="sidebar-item-list">
-                    <li>Trámites ante CFE y CENACE</li>
-                    <li>Permisos de construcción</li>
-                    <li>Gestión de licencias ambientales</li>
-                  </ul>
                 </div>
               </li>
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item sidebar-item-expanded">
+                <div class="sidebar-item-header">
                   <span>Infraestructura civil</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
+                </div>
+                <div class="sidebar-item-content sidebar-item-content-open">
                   <ul class="sidebar-item-list">
                     <li>Mallas de tierra</li>
                     <li>Bases, caminos</li>
@@ -251,49 +228,19 @@ const categories = [
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item">
+                <div class="sidebar-item-header">
                   <span>Obra civil y electromecánica</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
-                  <ul class="sidebar-item-list">
-                    <li>Montaje de equipos de potencia</li>
-                    <li>Instalación de transformadores</li>
-                    <li>Tendido de cables de alta tensión</li>
-                  </ul>
                 </div>
               </li>
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item">
+                <div class="sidebar-item-header">
                   <span>Fabricación de estructura para subestaciones eléctricas</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
-                  <ul class="sidebar-item-list">
-                    <li>Estructuras metálicas galvanizadas</li>
-                    <li>Soportería para equipos</li>
-                    <li>Herrajes y accesorios</li>
-                  </ul>
                 </div>
               </li>
-              <li class="sidebar-item" data-accordion-item>
-                <button class="sidebar-item-header" aria-expanded="false">
+              <li class="sidebar-item">
+                <div class="sidebar-item-header">
                   <span>Pruebas eléctricas, arranque y puesta en operación comercial</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </button>
-                <div class="sidebar-item-content">
-                  <ul class="sidebar-item-list">
-                    <li>Pruebas de aislamiento y resistencia</li>
-                    <li>Comisionamiento de equipos</li>
-                    <li>Puesta en servicio y energización</li>
-                  </ul>
                 </div>
               </li>
             </ul>
@@ -418,40 +365,6 @@ const categories = [
       } else {
         img.addEventListener('load', () => {
           img.classList.add('loaded');
-        });
-      }
-    });
-
-    // ============================================
-    // Servicios Sidebar Accordion
-    // ============================================
-    const accordionItems = document.querySelectorAll('[data-accordion-item]');
-    accordionItems.forEach(item => {
-      const header = item.querySelector('.sidebar-item-header') as HTMLButtonElement;
-      const content = item.querySelector('.sidebar-item-content') as HTMLElement;
-
-      if (header && content) {
-        header.addEventListener('click', () => {
-          const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-          // Close all other accordions
-          accordionItems.forEach(otherItem => {
-            const otherHeader = otherItem.querySelector('.sidebar-item-header') as HTMLButtonElement;
-            const otherContent = otherItem.querySelector('.sidebar-item-content') as HTMLElement;
-            if (otherHeader && otherContent && otherItem !== item) {
-              otherHeader.setAttribute('aria-expanded', 'false');
-              otherContent.style.maxHeight = '0';
-            }
-          });
-
-          // Toggle current accordion
-          if (isExpanded) {
-            header.setAttribute('aria-expanded', 'false');
-            content.style.maxHeight = '0';
-          } else {
-            header.setAttribute('aria-expanded', 'true');
-            content.style.maxHeight = content.scrollHeight + 'px';
-          }
         });
       }
     });
@@ -1086,40 +999,23 @@ const categories = [
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 14px 16px;
     background: #4a4a4a;
-    border: none;
     color: var(--color-white);
     font-size: 14px;
     font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     text-align: left;
-  }
-
-  .sidebar-item-header:hover {
-    background: #5a5a5a;
-  }
-
-  .sidebar-item-header[aria-expanded="true"] {
-    background: #3a3a3a;
-  }
-
-  .accordion-icon {
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .sidebar-item-header[aria-expanded="true"] .accordion-icon {
-    transform: rotate(180deg);
   }
 
   .sidebar-item-content {
     max-height: 0;
     overflow: hidden;
     background: var(--color-white);
-    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-item-content-open {
+    max-height: none;
+    overflow: visible;
   }
 
   .sidebar-item-content p {
