@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MexicoMap from '../components/molecules/MexicoMap.astro';
 import Logo from '../components/atoms/Logo.astro';
+import PresenceSection from '../components/organisms/PresenceSection.astro';
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -175,26 +176,8 @@ const organizationSchema = {
     </div>
   </section>
 
-  <!-- Presence Section -->
-  <section class="presence-section" aria-labelledby="presence-heading">
-    <div class="container">
-      <h2 id="presence-heading" class="section-heading">Presencia en México</h2>
-      <div class="presence-content">
-        <div class="map-container">
-          <MexicoMap
-            class="nosotros-map"
-            interactive={true}
-            highlightedStates={['baja_california', 'nuevo_leon', 'san_luis_potosi', 'queretaro']}
-          />
-          <img src="/images/pin.png" alt="Pin de ubicación" class="map-pin" loading="lazy" width="100" height="120" />
-          <div class="location-badge" aria-label="Ubicaciones principales de PIXII en México" itemscope itemtype="https://schema.org/Organization">
-            <span class="badge-location" itemprop="location">Mexicali, Tijuana, Querétaro</span>
-            <span class="badge-location" itemprop="location">Monterrey, San Luis Potosí</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Presence Section — mismo componente que el inicio -->
+  <PresenceSection />
 
   <!-- Certifications Section -->
   <section class="certifications-section" aria-labelledby="cert-heading">

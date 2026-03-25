@@ -70,18 +70,18 @@ const productGalleryData = {
 const categories = [
   {
     id: 'productos',
-    title: 'Productos',
+    title: 'PRODUCTOS',
     subtitle: 'Equipos Eléctricos de Potencia',
-    image: `${productosPath}/Transformador de Potencia.png`,
+    image: `${productosPath}/portada-productos.jpeg`,
     sharedGallery: true, // Flag to indicate shared gallery behavior
     galleryData: productGalleryData,
     items: productItems
   },
   {
     id: 'servicios',
-    title: 'Servicios',
+    title: 'SERVICIOS',
     subtitle: 'Complementarios',
-    image: `${serviciosPath}/ZUMA PARQUE EOLICO REYNOSA/04SC - ZUMAPARQUEEOLICOREYNOSA01.jpeg`,
+    image: `${serviciosPath}/portada-servicios.jpeg`,
     items: [
       {
         label: 'Zuma Parque Eólico Reynosa',
@@ -204,7 +204,7 @@ const categories = [
       <div class={category.id === 'servicios' ? 'container servicios-layout' : 'container'}>
         {category.id === 'servicios' && (
           <aside class="servicios-sidebar">
-            <h2 class="sidebar-title">Servicios</h2>
+            <h2 class="sidebar-title">SERVICIOS</h2>
             <ul class="sidebar-list">
               <li class="sidebar-item">
                 <div class="sidebar-item-header">
