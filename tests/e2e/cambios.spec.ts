@@ -159,27 +159,28 @@ test.describe('B — Boundary: formatos exactos', () => {
 // ─── I — Interface: mapa en /nosotros igual al de inicio ─────────────────────
 
 test.describe('I — Interface: componente de mapa consistente', () => {
-  test('la página /nosotros tiene un mapa interactivo visible (.map-container)', async ({ page }) => {
+  test('la página /nosotros tiene un mapa interactivo visible (.map-overflow-container)', async ({ page }) => {
     await page.goto('/nosotros');
     await page.waitForLoadState('networkidle');
-    const map = page.locator('.map-container').first();
+    // Ahora usa PresenceSection directamente, igual que inicio
+    const map = page.locator('.map-overflow-container').first();
     await expect(map).toBeVisible();
   });
 
   test('el mapa en /nosotros usa el mismo componente SVG que el de inicio', async ({ page }) => {
-    // Verificar que el SVG del mapa (MexicoMap) existe en inicio
+    // Verificar SVG en inicio
     await page.goto('/');
     await page.waitForLoadState('networkidle');
-    const svgHome = page.locator('.map-overflow-container svg, .presence-section svg').first();
+    const svgHome = page.locator('.map-overflow-container svg').first();
     await expect(svgHome).toBeVisible();
 
-    // Verificar que el mismo SVG existe en /nosotros
+    // Verificar SVG en /nosotros — ahora también usa .map-overflow-container
     await page.goto('/nosotros');
     await page.waitForLoadState('networkidle');
-    const svgNosotros = page.locator('.map-container svg').first();
+    const svgNosotros = page.locator('.map-overflow-container svg').first();
     await expect(svgNosotros).toBeVisible();
 
-    // Ambos deben tener el mismo viewBox (misma estructura SVG = mismo componente)
+    // Mismo viewBox = mismo componente MexicoMap
     const homeViewBox = await svgHome.getAttribute('viewBox');
     const nosotrosViewBox = await svgNosotros.getAttribute('viewBox');
     expect(nosotrosViewBox).toBe(homeViewBox);
