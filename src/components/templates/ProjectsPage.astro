@@ -27,8 +27,8 @@ const schemaData = {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Redes Eléctricas y Líneas de Transmisión",
-        "description": "Proyectos de redes eléctricas y líneas de transmisión de alta tensión",
+        "name": "Redes Eléctricas Aéreas y Subterráneas",
+        "description": "Proyectos de redes eléctricas aéreas y subterráneas de alta tensión",
         "url": "https://pixii.com.mx/proyectos#redes"
       }
     ]
@@ -251,19 +251,34 @@ const projects = [
   },
   {
     id: 'redes',
-    title: 'REDES ELÉCTRICAS',
-    subtitle: 'y Líneas de Transmisión',
+    title: 'REDES ELÉCTRICAS AÉREAS Y SUBTERRÁNEAS',
+    subtitle: '',
     image: `${basePath}/portada-redes.jpeg`,
     items: [
       {
         label: 'LT 115KV Aluminio ABC',
-        thumbnail: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=600&h=400&fit=crop',
-        gallery: ['https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1200&h=800&fit=crop']
+        thumbnail: `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC01.jpeg`,
+        gallery: [
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC01.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC02.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC03.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC04.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC05.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV ALUMINIO ABC/03RE - LT115KVALUMINIOABC06.jpeg`
+        ]
       },
       {
         label: 'LT 115KV KIO Networks',
-        thumbnail: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop',
-        gallery: ['https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=800&fit=crop']
+        thumbnail: `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS01.jpeg`,
+        gallery: [
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS01.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS02.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS03.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS04.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS05.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS06.jpeg`,
+          `${basePath}/03 REDES ELECTRICAS/LT 115KV KIO NETWORKS/03RE - LT115KVKIONETWORKS07.jpeg`
+        ]
       }
     ]
   },
@@ -351,12 +366,12 @@ const projects = [
         href={`#${project.id}`}
         class="project-card"
         data-target={project.id}
-        aria-label={`Ver proyectos de ${project.title}: ${project.subtitle}`}
+        aria-label={`Ver proyectos de ${project.title}${project.subtitle ? `: ${project.subtitle}` : ''}`}
       >
         <div class="card-background">
           <img
             src={project.image}
-            alt={`${project.title} - ${project.subtitle} | PIXII Proyectos`}
+            alt={`${project.title}${project.subtitle ? ` - ${project.subtitle}` : ''} | PIXII Proyectos`}
             class="card-image"
             width="800"
             height="600"
